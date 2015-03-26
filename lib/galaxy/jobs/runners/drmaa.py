@@ -191,6 +191,17 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
         #Username as which to run the job
         if (self.external_chown_script != None):
             jt.nativeSpecification = jt.nativeSpecification + '\nsubmit_as_user=' + job_wrapper.user_system_pwent[0];
+        #For CCC
+        if(self.app.config.use_uuids_for_dataset_reference()):
+            jt.nativeSpecification = jt.nativeSpecification + '\n' + 'input_CCC_DID_list=' + ','.join(job_wrapper.get_input_string_uuids());
+            jt.nativeSpecification = jt.nativeSpecification + '\n' + 'output_CCC_DID_list=' + ','.join(job_wrapper.get_output_string_uuids());
+            jt.nativeSpecification = jt.nativeSpecification + '\n' + 'tool_id=' + job_wrapper.get_tool_id();
+            workflow_tuple = job_wrapper.get_workflow_invocation_info();
+            if(workflow_tuple):
+                (workflow_name, workflow_id, workflow_invocation_id) = workflow_tuple;
+                jt.nativeSpecification = jt.nativeSpecification + '\n' + 'workflow_name=' + workflow_name;
+                jt.nativeSpecification = jt.nativeSpecification + '\n' + 'workflow_id=' + str(workflow_id);
+                jt.nativeSpecification = jt.nativeSpecification + '\n' + 'workflow_invocation_id=' + str(workflow_invocation_id);
         jt.nativeSpecification = jt.nativeSpecification + '\n';
         log.debug('NATIVE : '+jt.nativeSpecification);
 

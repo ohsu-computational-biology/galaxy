@@ -284,6 +284,21 @@ collect_outputs_from = new_file_path,job_working_directory
 # distributed.  See the sample at distributed_object_store_conf.xml.sample
 #distributed_object_store_config_file = None
 
+# -- Remote datasets
+
+# Flag to determine whether datasets produced by jobs or uploaded to Galaxy 
+# libraries are remote, i.e., they are NOT accessible from the Galaxy server.  
+# Default: False
+#use_remote_datasets = False
+
+# Variable that controls how remote datasets should be referred to in scripts 
+# produced by Galaxy. The default value, 'identical_filesystem', assumes that 
+# the filesystem tree on the remote systems is identical to that on the Galaxy 
+# server. Other values are 'uuid', which refers to datasets by their UUIDs. It's 
+# up to a backend to replace the UUID values with correct paths on the server.  
+# Currently, only the DRMAA backend is supported
+#remote_datasets_referral_method = identical_filesystem
+
 
 # -- Mail and notification
 
