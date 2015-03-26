@@ -219,6 +219,8 @@
   <section id="testing_tools" name="Testing tools">
     <tool file="sum/product_map.xml"/>
     <tool file="sum/sum_reduce.xml"/>
+    <tool file="sum/hacked_samtools_flagstat.xml"/>
+    <tool file="sum/hacked_sam_to_bam.xml" />
   </section>
   <section id="DNA_sequencing" name="DNA sequencing tools">
     <label id="BWA" text="BWA-MEM 0.7.9a" />

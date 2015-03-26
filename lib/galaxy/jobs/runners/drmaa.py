@@ -88,7 +88,7 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
         # external_runJob_script can be None, in which case it's not used.
         self.external_runJob_script = app.config.drmaa_external_runjob_script
         self.external_killJob_script = app.config.drmaa_external_killjob_script
-	self.external_chown_script = app.config.external_chown_script;
+        self.external_chown_script = app.config.external_chown_script;
         self.userid = None
 
         self._init_monitor_thread()
@@ -117,9 +117,9 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
     def queue_job( self, job_wrapper ):
         """Create job script and submit it to the DRM"""
         
-	#Was useful when DRMAA implementation in Condor seems to be buggy
-	#Fixed DRMAA implementation directly - useless now
-	append_to_command = None;
+        #Was useful when DRMAA implementation in Condor seems to be buggy
+        #Fixed DRMAA implementation directly - useless now
+        append_to_command = None;
 
         # prepare the job
         if not self.prepare_job( job_wrapper, include_metadata=True, append_to_command=append_to_command ):
@@ -145,7 +145,7 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
         jt.remoteCommand = ajs.job_file
         jt.jobName = ajs.job_name
 
-	#Karthik: Use this only for non-buggy DRMAA implementation 
+        #Karthik: Use this only for non-buggy DRMAA implementation 
         jt.outputPath = ":%s" % ajs.output_file
         jt.errorPath = ":%s" % ajs.error_file
 
@@ -153,7 +153,7 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
         native_spec = job_destination.params.get('nativeSpecification', None)
         if native_spec is not None:
             jt.nativeSpecification = native_spec
-	    jt.nativeSpecification = jt.nativeSpecification.replace('\\n','\n');
+            jt.nativeSpecification = jt.nativeSpecification.replace('\\n','\n');
 
         # fill in the DRM's job run template
         script = self.get_job_file(job_wrapper, exit_code_path=ajs.exit_code_file)
@@ -194,6 +194,9 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
         jt.nativeSpecification = jt.nativeSpecification + '\n';
         log.debug('NATIVE : '+jt.nativeSpecification);
 
+        #Karthik: HACK HACK HACK
+        subprocess.call('rsync -a -e \"ssh\" /mnt/app_hdd/scratch/karthikg/Galaxy/database/job_working_directory/ c14:/mnt/app_hdd/scratch/karthikg/Galaxy/database/job_working_directory/', shell=True);
+        time.sleep(5);  #NFS stabilize
 
         # runJob will raise if there's a submit problem
         if self.external_runJob_script is None:
@@ -325,12 +328,12 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
             ext_id = job.get_job_runner_external_id()
             assert ext_id not in ( None, 'None' ), 'External job id is None'
             if self.external_killJob_script is None:
-		#Karthik: pass username through ext_id - custom DRMAA library parses username correctly
-		username = pwd.getpwnam( job.user.email.split('@')[0] )[0];
-	        assert username not in ( None, 'None' ), 'Username is None';
-		if(self.external_chown_script != None):
-		    ext_id = username + ':' + ext_id;
-		log.debug('Job id passed to DRMAA control TERMINATE '+ext_id);
+                #Karthik: pass username through ext_id - custom DRMAA library parses username correctly
+                username = pwd.getpwnam( job.user.email.split('@')[0] )[0];
+                assert username not in ( None, 'None' ), 'Username is None';
+                if(self.external_chown_script != None):
+                    ext_id = username + ':' + ext_id;
+                log.debug('Job id passed to DRMAA control TERMINATE '+ext_id);
                 self.ds.control( ext_id, drmaa.JobControlAction.TERMINATE )
             else:
                 # FIXME: hardcoded path
