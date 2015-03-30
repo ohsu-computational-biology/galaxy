@@ -25,13 +25,22 @@
 	[server:id] in universe_wsgi.ini.
 	-->
     </handlers>
-    <destinations default="condor_16C_16G">
+    <destinations default="condor_CCC">
 	<!-- Destinations define details about remote resources and how jobs
 	should be executed on those remote resources.
 	-->
 	<destination id="local" runner="local" metrics="off"/>
 	<destination id="condor_16C_16G" runner="drmaa">
 	  <param id="nativeSpecification">getenv=True\nrequest_cpus=16\nrequest_memory=16 GB\nrequirements=(machine=="c14.spark0.intel.com")</param>
+        </destination>
+        <destination id="condor_CCC" runner="drmaa">
+            <param id="nativeSpecification">getenv=True\nremote_universe = vanilla\n+remote_RequestCpus=8\n+remote_RequestMemory=8192</param>
+        </destination>
+	<destination id="condor_remote_g1" runner="drmaa">
+            <param id="nativeSpecification">getenv=True\nuniverse=grid\ngrid_resource = condor g1.spark0.intel.com g1.spark0.intel.com\nremote_universe = vanilla\n+remote_RequestCpus=8\n+remote_RequestMemory=8192</param>
+        </destination>
+	<destination id="condor_remote_g2" runner="drmaa">
+            <param id="nativeSpecification">getenv=True\nuniverse=grid\ngrid_resource = condor g2.spark0.intel.com g1.spark0.intel.com\nremote_universe = vanilla\n+remote_RequestCpus=8\n+remote_RequestMemory=8192</param>
 	</destination>
 	<destination id="condor_galaxy" runner="drmaa" metrics="off">
 	  <param id="nativeSpecification">getenv=True\nrequest_cpus=2\nrequest_memory=8 GB\nrequirements=(machine=="exanode-0-23.local")</param>
