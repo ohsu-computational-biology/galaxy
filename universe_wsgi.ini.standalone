@@ -304,6 +304,10 @@ collect_outputs_from = new_file_path,job_working_directory
 # Default: False
 #use_CCC_DRMAA = True
 
+# File containing the list of environment variables to pass to the CCC WFM
+# Default: contrib/intel_env_vars_list.txt
+CCC_env_vars_list_file = contrib/intel_env_vars_list.txt
+
 # -- Mail and notification
 
 # Galaxy sends mail for various things: Subscribing users to the mailing list
