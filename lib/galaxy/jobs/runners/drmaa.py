@@ -10,6 +10,7 @@ import subprocess
 import sys
 import time
 import pwd
+import uuid
 
 from galaxy import eggs
 from galaxy import model
@@ -82,10 +83,10 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
             drmaa.JobState.FAILED: 'job finished, but failed',
         }
 
-        if(self.app.config.use_uuids_for_dataset_reference()):
+        if(self.app.config.use_CCC_DRMAA):
             import CCCsession;
-            #self.ds = CCCsession.Session();
-            self.ds = drmaa.Session()
+            self.ds = CCCsession.Session();
+            #self.ds = drmaa.Session()
         else:
             self.ds = drmaa.Session()
         self.ds.initialize()
@@ -192,19 +193,27 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
         if(jt.nativeSpecification == None):
             jt.nativeSpecification = '';
         #Directory from which to start job - required when transferring scripts etc to remote sites
-        jt.workingDirectory = job_wrapper.working_directory
+        jt.workingDirectory = job_wrapper.working_directory;
         #Username as which to run the job
-        if (self.external_chown_script != None):
-            jt.nativeSpecification = jt.nativeSpecification + '\nsubmit_as_user=' + job_wrapper.user_system_pwent[0];
+        if (self.external_chown_script != None or self.app.config.use_CCC_DRMAA):
+            if(self.external_chown_script != None):
+                jt.nativeSpecification = jt.nativeSpecification + '\nsubmit_as_user=' + job_wrapper.user_system_pwent[0];
+            else:
+                jt.nativeSpecification += '\nsubmit_as_user=' + job_wrapper.galaxy_system_pwent[0];
 
         #Should transfer whole working directory when job is run on remote datasets
         if(self.app.config.use_remote_datasets):
-            jt.nativeSpecification += '\n' + 'transfer_input_files = '+job_wrapper.working_directory + os.sep;
-            jt.nativeSpecification += '\n' + 'should_transfer_files = IF_NEEDED';
+            if(self.app.config.use_CCC_DRMAA):
+                jt.nativeSpecification += '\n' + 'TransferInput = '+job_wrapper.working_directory + os.sep;
+                jt.nativeSpecification += '\n' + 'ShouldTransferFiles = IF_NEEDED';
+            else:
+                jt.nativeSpecification += '\n' + 'transfer_input_files = '+job_wrapper.working_directory + os.sep;
+                jt.nativeSpecification += '\n' + 'should_transfer_files = IF_NEEDED';
 
         #For CCC
-        if(self.app.config.use_uuids_for_dataset_reference()):
-            #FIXME: PaaS code assumes all UUIDs are bounded by [], fix in PaaS
+        if(self.app.config.use_CCC_DRMAA):
+            jt.nativeSpecification += '\noutput_aggregated=False\noutput_aggregation_type=merge';
+            #FIXME: CCC DRMAA code assumes all UUIDs are bounded by [], fix
             jt.nativeSpecification = jt.nativeSpecification + '\n' + 'input_CCC_DID_list=' + ','.join(map(lambda x:'[' + x + ']', 
                 job_wrapper.get_input_string_uuids()));
             jt.nativeSpecification = jt.nativeSpecification + '\n' + 'output_CCC_DID_list=' + ','.join(map(lambda x:'[' + x + ']',
@@ -216,8 +225,11 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
                 jt.nativeSpecification = jt.nativeSpecification + '\n' + 'workflow_name=' + workflow_name;
                 jt.nativeSpecification = jt.nativeSpecification + '\n' + 'workflow_id=' + str(workflow_id);
                 jt.nativeSpecification = jt.nativeSpecification + '\n' + 'workflow_invocation_id=' + str(workflow_invocation_id);
-            jt.nativeSpecification = jt.nativeSpecification.replace('\n', '|');        #PaaS does not like newline separators
-            jt.outputPath = "%s" % ajs.output_file      #PaaS implementation of DRMAA does not like : at the beginning
+            #Environment variables to pass to CCC
+            CCC_environment_variables = [ 'PATH', 'SAMTOOLS_EXE_PATH', ]; 
+            jt.nativeSpecification += '\nenvironment_vars=' + ','.join(CCC_environment_variables);
+            jt.nativeSpecification = jt.nativeSpecification.replace('\n', '|');        #CCC DRMAA does not like newline separators
+            jt.outputPath = "%s" % ajs.output_file      #CCC DRMAA does not like : at the beginning, non-compliant with standard
             jt.errorPath = "%s" % ajs.error_file
 
         jt.nativeSpecification = jt.nativeSpecification + '\n';
@@ -226,7 +238,6 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
         #Karthik: HACK HACK HACK
         #subprocess.call('rsync -a -e \"ssh\" /mnt/app_hdd/scratch/karthikg/Galaxy/database/job_working_directory/ c14:/mnt/app_hdd/scratch/karthikg/Galaxy/database/job_working_directory/', shell=True);
         #time.sleep(5);  #NFS stabilize
-
         # runJob will raise if there's a submit problem
         if self.external_runJob_script is None:
             # TODO: create a queue for retrying submission indefinitely

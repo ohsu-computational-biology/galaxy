@@ -34,7 +34,7 @@
 	  <param id="nativeSpecification">getenv=True\nrequest_cpus=16\nrequest_memory=16 GB\nrequirements=(machine=="c14.spark0.intel.com")</param>
         </destination>
         <destination id="condor_CCC" runner="drmaa">
-            <param id="nativeSpecification">getenv=True\nremote_universe = vanilla\n+remote_RequestCpus=8\n+remote_RequestMemory=8192</param>
+            <param id="nativeSpecification">getenv=True\n+remote_jobuniverse = 5\n+remote_RequestCpus=8\n+remote_RequestMemory=8192</param>
         </destination>
 	<destination id="condor_remote_g1" runner="drmaa">
             <param id="nativeSpecification">getenv=True\nuniverse=grid\ngrid_resource = condor g1.spark0.intel.com g1.spark0.intel.com\nremote_universe = vanilla\n+remote_RequestCpus=8\n+remote_RequestMemory=8192</param>
@@ -58,6 +58,7 @@
 	<tool id="cbioportal_create_files" destination="condor_galaxy"/>
 	<tool id="cbioportal_importer_tool" destination="condor_galaxy"/>
 	<tool id="cbioportal_get_database_info" destination="condor_galaxy"/>
+        <tool id="upload1" destination="condor_2C_2G"/>
 	<!--<tool id="product_map" destination="condor_2C_2G"/>-->
 	<!--<tool id="sum_reduce" destination="condor_2C_2G"/>-->
 	<!--<tool id="getAnnotation" destination="condor_2C_2G"/>-->

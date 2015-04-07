@@ -299,6 +299,10 @@ collect_outputs_from = new_file_path,job_working_directory
 # Currently, only the DRMAA backend is supported
 #remote_datasets_referral_method = identical_filesystem
 
+# Variable that controls whether the DRMAA implementation to use is the CCC
+# implementation.
+# Default: False
+#use_CCC_DRMAA = True
 
 # -- Mail and notification
 

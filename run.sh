@@ -18,7 +18,7 @@ export SEATTLESEQ_WRITEGENOTYPE_JAR_PATH=/opt/Genomics/annotation/writeGenotype/
 export PATH=$GENOMICS_DIR:$BWA_DIR:$SAMTOOLS_DIR:$PICARD_PATH:$PYTHON_2_7_PATH/bin:$PATH
 export NSLOTS=16
 export PYTHON_EGG_CACHE=.eggs_cache
-export CCC_DRMAA_PYTHON_MODULE_DIRECTORY=/home/karthikg/galaxy_info/development/api_test/CCC_DRMAA
+export CCC_DRMAA_PYTHON_MODULE_DIRECTORY=/mnt/app_hdd/CCC_central/testDRMAA/
 export PYTHONPATH=${CCC_DRMAA_PYTHON_MODULE_DIRECTORY}:$PYTHONPATH
 
 cd `dirname $0`
