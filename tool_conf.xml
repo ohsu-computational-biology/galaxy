@@ -101,6 +101,9 @@
     <tool file="maf/maf_reverse_complement.xml" />
     <tool file="maf/maf_filter.xml" />
   </section>
+  <section id="cellprofiler" name="CellProfiler">
+    <tool file="cellprofiler/cellprofiler.xml" />
+  </section>
   <section id="scores" name="Get Genomic Scores">
     <tool file="filters/wiggle_to_simple.xml" />
     <tool file="stats/aggregate_binned_scores_in_intervals.xml" />
@@ -246,6 +249,8 @@
     <label id="BICSeq" text="BICSeq" />
 	    <tool file="Suzi_pipeline/Bic-Seq_samtools.xml" />
 	    <tool file="Suzi_pipeline/Bic-Seq.xml" /> 
+    <label id="mutect" text="MuTect version 1.1.7" />
+	    <tool file="mutect/muTect.xml" />
   </section>  
   <section id="cbioportal_tools" name="cBioPortal Tools">
     <tool file="cbioportal/cbioportal_create_files.xml" />
