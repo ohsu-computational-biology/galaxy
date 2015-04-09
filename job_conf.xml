@@ -56,6 +56,9 @@
             <param id="docker_volumes">$defaults</param>
             <param id="nativeSpecification">getenv=True\nrequest_cpus=16\nrequest_memory=16 GB</param>
         </destination>
+	<destination id="condor_HPt" runner="drmaa">
+	  <param id="nativeSpecification">getenv=True\nrequirements = (TARGET.IsHarmonyPointTPUExecutor =?= True)</param>
+	</destination>
     </destinations>
     <tools>
 	<!-- Tools can be configured to use specific destinations or handlers,
@@ -70,6 +73,7 @@
 	<tool id="sum_reduce" destination="condor_2C_2G"/>
 	<tool id="getAnnotation" destination="condor_2C_2G"/>
 	<tool id="upload1" destination="condor_1C_100M"/>
+        <tool id="hpt" destination="condor_HPt"/>
     </tools>
     <limits>
 	<!-- Certain limits can be defined. -->

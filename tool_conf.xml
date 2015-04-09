@@ -308,6 +308,9 @@
   </section>
   <section id="variant_db_tools" name="Variant DB tools">
     <tool file="variant_db/variant_db_client.xml"/>
+  </section>  
+  <section id="HPt_tools" name="Harmony Point Tools">
+    <tool file="HP_Tools/hpt.xml"/>
   </section>
   <section id="custom_tools" name="Custom tools">
   </section>
