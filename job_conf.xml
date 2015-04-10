@@ -40,7 +40,7 @@
             <param id="nativeSpecification">getenv=True\nuniverse=grid\ngrid_resource = condor g1.spark0.intel.com g1.spark0.intel.com\nremote_universe = vanilla\n+remote_RequestCpus=8\n+remote_RequestMemory=8192</param>
         </destination>
 	<destination id="condor_remote_g2" runner="drmaa">
-            <param id="nativeSpecification">getenv=True\nuniverse=grid\ngrid_resource = condor g2.spark0.intel.com g1.spark0.intel.com\nremote_universe = vanilla\n+remote_RequestCpus=8\n+remote_RequestMemory=8192</param>
+            <param id="nativeSpecification">getenv=True\nuniverse=grid\ngrid_resource = condor g2.spark0.intel.com g2.spark0.intel.com\nremote_universe = vanilla\n+remote_RequestCpus=8\n+remote_RequestMemory=8192</param>
 	</destination>
 	<destination id="condor_galaxy" runner="drmaa" metrics="off">
 	  <param id="nativeSpecification">getenv=True\nrequest_cpus=2\nrequest_memory=8 GB\nrequirements=(machine=="exanode-0-23.local")</param>
