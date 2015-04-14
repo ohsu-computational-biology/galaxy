@@ -18,8 +18,8 @@
 	</plugin>
     </plugins>
     <handlers default="handlers">
-      <!--<handler id="handler"  tags="handlers"/>-->
-      <handler id="main"  tags="handlers"/>
+      <handler id="handler"  tags="handlers"/>
+      <!--<handler id="main"  tags="handlers"/>-->
       <!--<handler id="main"  tags="handlers"/>-->
 	<!-- Additional job handlers - the id should match the name of a
 	[server:id] in universe_wsgi.ini.
