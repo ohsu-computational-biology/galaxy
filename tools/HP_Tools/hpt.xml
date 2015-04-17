@@ -1,6 +1,6 @@
 <tool id="hpt" name="Application">
   <description></description>
-  <command interpreter="python">/opt/HarmonyPoint/Galaxy/galaxy-dist/tools/HP_Tools/submitter/submitter.py $input1 $input2</command>
+  <command interpreter="python">/opt/HarmonyPoint/Galaxy/galaxy-dist/tools/HP_Tools/submitter/submitter.py $input1 $input2 $output</command>
   <inputs>
     <param name="input1" type="select" label="Select Application">
        <option value="bcftool">bcftool</option>
