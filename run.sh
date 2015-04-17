@@ -2,7 +2,7 @@
 
 cd `dirname $0`
 
-source contrib/intel_env.sh
+source contrib/ohsu_exacloud_env.sh 
 
 # If there is a .venv/ directory, assume it contains a virtualenv that we
 # should run this instance in.
