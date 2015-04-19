@@ -1339,7 +1339,7 @@ class JobWrapper( object ):
 
         #Karthik: don't bother with chown if remote dataset
         if(self.app.config.external_chown_script != None):
-            for dataset_path in self.get_output_fnames():
+            for dataset_path in self.get_mutable_output_fnames():
                 context = self.get_dataset_finish_context( {}, dataset_path.dataset_id )
                 is_remote_dataset_flag = self.is_remote_dataset(context);
                 if(not is_remote_dataset_flag):
