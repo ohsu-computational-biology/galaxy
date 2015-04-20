@@ -1182,6 +1182,7 @@ class JobWrapper( object ):
                 # Update (non-library) job output datasets through the object store
                 if (not is_remote_dataset_flag) and (dataset not in job.output_library_datasets):
                     self.app.object_store.update_from_file(dataset.dataset, create=True)
+                self._collect_extra_files(dataset.dataset, self.working_directory)
                 if job.states.ERROR == final_job_state:
                     dataset.blurb = "error"
                     dataset.mark_unhidden()
@@ -1305,8 +1306,6 @@ class JobWrapper( object ):
         # instead of validated and transformed values during i.e. running workflows
         param_dict = dict( [ ( p.name, p.value ) for p in job.parameters ] )
         param_dict = self.tool.params_from_strings( param_dict, self.app )
-        # Check for and move associated_files
-        self.tool.collect_associated_files(out_data, self.working_directory)
         # Create generated output children and primary datasets and add to param_dict
         collected_datasets = {
             'children': self.tool.collect_child_datasets(out_data, self.working_directory),
@@ -1337,6 +1336,17 @@ class JobWrapper( object ):
         if job.user:
             job.user.total_disk_usage += bytes
 
+        # Empirically, we need to update job.user and
+        # job.workflow_invocation_step.workflow_invocation in separate
+        # transactions. Best guess as to why is that the workflow_invocation
+        # may or may not exist when the job is first loaded by the handler -
+        # and depending on whether it is or not sqlalchemy orders the updates
+        # differently and deadlocks can occur (one thread updates user and
+        # waits on invocation and the other updates invocation and waits on
+        # user).
+        self.sa_session.flush()
+
+        # fix permissions
         #Karthik: don't bother with chown if remote dataset
         if(self.app.config.external_chown_script != None):
             for dataset_path in self.get_mutable_output_fnames():
@@ -1348,8 +1358,6 @@ class JobWrapper( object ):
                     except:
                         log.exception( '(%s) Failed to change ownership of %s, failing' % ( job.id, dataset_path.real_path ) )
                         return self.fail( job.info, stdout=stdout, stderr=stderr, exit_code=tool_exit_code )
-
-        # fix permissions
         #for path in [ dp.real_path for dp in self.get_mutable_output_fnames() ]:
             #util.umask_fix_perms( path, self.app.config.umask, 0666, self.app.config.gid )
 
@@ -1382,6 +1390,28 @@ class JobWrapper( object ):
                 self.app.object_store.delete(self.get_job(), base_dir='job_work', entire_dir=True, dir_only=True, extra_dir=str(self.job_id))
         except:
             log.exception( "Unable to cleanup job %d" % self.job_id )
+
+    def _collect_extra_files(self, dataset, job_working_directory):
+        temp_file_path = os.path.join( job_working_directory, "dataset_%s_files" % ( dataset.id ) )
+        extra_dir = None
+        try:
+            # This skips creation of directories - object store
+            # automatically creates them.  However, empty directories will
+            # not be created in the object store at all, which might be a
+            # problem.
+            for root, dirs, files in os.walk( temp_file_path ):
+                extra_dir = root.replace(job_working_directory, '', 1).lstrip(os.path.sep)
+                for f in files:
+                    self.app.object_store.update_from_file(
+                        dataset,
+                        extra_dir=extra_dir,
+                        alt_name=f,
+                        file_name=os.path.join(root, f),
+                        create=True,
+                        preserve_symlinks=True
+                    )
+        except Exception, e:
+            log.debug( "Error in collect_associated_files: %s" % ( e ) )
 
     def _collect_metrics( self, has_metrics ):
         job = has_metrics.get_job()
