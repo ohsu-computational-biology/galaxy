@@ -225,6 +225,7 @@
     <tool file="sum/hacked_samtools_flagstat.xml"/>
     <tool file="sum/hacked_sam_to_bam.xml" />
     <tool file="sum/summer.xml" />
+    <tool file="sum/test_from_wd.xml" />
   </section>
   <section id="DNA_sequencing" name="DNA sequencing tools">
     <label id="BWA" text="BWA-MEM 0.7.9a" />
