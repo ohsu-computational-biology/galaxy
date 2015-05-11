@@ -73,7 +73,10 @@
 	<tool id="sum_reduce" destination="condor_2C_2G"/>
 	<tool id="getAnnotation" destination="condor_2C_2G"/>
 	<tool id="upload1" destination="condor_1C_100M"/>
-        <tool id="hpt" destination="condor_HPt"/>
+	<tool id="hpt" destination="condor_HPt"/>
+	<tool id="beat_aml_rnaseq" destination="local"/>
+	<tool id="brenden_coulson" destination="local"/>
+	<tool id="icgc_genomes" destination="local"/>
     </tools>
     <limits>
 	<!-- Certain limits can be defined. -->
