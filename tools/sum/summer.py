@@ -7,7 +7,7 @@ if(len(sys.argv) < 3):
     sys.exit(-1);
 
 sum=0;
-for filename in sys.argv[1:len(sys.argv)-2]:
+for filename in sys.argv[1:len(sys.argv)-1]:
     fptrS=open(filename, "r");
     for line in fptrS:
         line = line.rstrip();
