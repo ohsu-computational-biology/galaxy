@@ -27,3 +27,4 @@ export NSLOTS=16
 export PYTHON_EGG_CACHE=.eggs_cache
 export CCC_DRMAA_PYTHON_MODULE_DIRECTORY=/mnt/app_hdd/CCC_central/testDRMAA/
 export PYTHONPATH=${CCC_DRMAA_PYTHON_MODULE_DIRECTORY}:$PYTHONPATH
+export BIOBLEND_REPO_DIR=/cluster_share/Galaxy/api/bioblend
