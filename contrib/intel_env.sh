@@ -13,6 +13,8 @@ export SAMTOOLS_EXE_PATH=$SAMTOOLS_DIR/samtools
 export PICARD_PATH=$GENOMICS_DIR/ohsu/dnapipeline/picard-tools-1.110
 export GATK_JAR_PATH=/opt/gsa-unstable/target/GenomeAnalysisTK.jar
 export CP_PATH=/cluster_share/cp_pipeline
+export LABKEY_USERNAME=ccc@ccc.com
+export LABKEY_PASSWORD=Intel123
 export SEATTLESEQ_GETANNOTATION_JAR_PATH=/opt/Genomics/annotation/getAnnotation/project/
 export SEATTLESEQ_WRITEGENOTYPE_JAR_PATH=/opt/Genomics/annotation/writeGenotype/project/
 export MUTECT_JAR_PATH=$GENOMICS_DIR/ohsu/dnapipeline/mutect-1.1.7.jar
@@ -23,4 +25,4 @@ export CUFFDIFF_SCRIPT_PATH=/opt/Genomics/ohsu/rnapipeline
 export PATH=$TOPHAT_EXE_PATH:$CUFFLINKS_TOOLS_EXE_PATH:$BOWTIE_TOOLS_EXE_PATH:$GENOMICS_DIR:$BWA_DIR:$SAMTOOLS_DIR:$PICARD_PATH:$PYTHON_2_7_PATH/bin:$PATH
 export NSLOTS=16
 export PYTHON_EGG_CACHE=.eggs_cache
-
+export BIOBLEND_REPO_DIR=/cluster_share/Galaxy/api/bioblend
