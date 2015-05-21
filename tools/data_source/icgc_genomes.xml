@@ -10,7 +10,7 @@
 		--password \$LABKEY_PASSWORD 
 		--xml $__tool_directory__/genomes_conf.xml
 		--output ${output}
-        --filter "application~eq=WGS"
+		--filter "application~eq=WGS"
 		#if $primarySite 
 			 --filter "specimen_id/project_code/PrimarySite~eq=$primarySite"
 		#end if

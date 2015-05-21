@@ -56,8 +56,15 @@
             <param id="docker_volumes">$defaults</param>
             <param id="nativeSpecification">getenv=True\nrequest_cpus=16\nrequest_memory=16 GB</param>
         </destination>
+	<destination id="condor_1C_100M_fetch" runner="drmaa">
+	  <param id="nativeSpecification">getenv=True\nrequest_cpus=1\nrequest_memory=100 MB\njob_type=transfer</param>
+	</destination>
+
+	<destination id="condor_1C_100M_central" runner="drmaa">
+	  <param id="nativeSpecification">getenv=True\nrequest_cpus=1\nrequest_memory=100 MB\njob_type=localized</param>
+	</destination>
 	<destination id="condor_HPt" runner="drmaa">
-	  <param id="nativeSpecification">getenv=True\nrequirements = (TARGET.IsHarmonyPointTPUExecutor =?= True)</param>
+	  <param id="nativeSpecification">getenv=True\nrequirements = (TARGET.IsHarmonyPointTPUExecutor =?= True)\njob_type=localized</param>
 	</destination>
     </destinations>
     <tools>
@@ -72,8 +79,9 @@
 	<tool id="product_map" destination="condor_2C_2G"/>
 	<tool id="sum_reduce" destination="condor_2C_2G"/>
 	<tool id="getAnnotation" destination="condor_2C_2G"/>
-	<tool id="upload1" destination="condor_1C_100M"/>
+	<tool id="upload1" destination="condor_1C_100M_central"/>
 	<tool id="hpt" destination="condor_HPt"/>
+	<tool id="ccc_fetch" destination="condor_1C_100M_fetch"/>
 	<tool id="beat_aml_rnaseq" destination="local"/>
 	<tool id="brenden_coulson" destination="local"/>
 	<tool id="icgc_genomes" destination="local"/>
