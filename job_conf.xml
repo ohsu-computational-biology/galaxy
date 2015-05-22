@@ -57,14 +57,14 @@
             <param id="nativeSpecification">getenv=True\nrequest_cpus=16\nrequest_memory=16 GB</param>
         </destination>
 	<destination id="condor_1C_100M_fetch" runner="drmaa">
-	  <param id="nativeSpecification">getenv=True\nrequest_cpus=1\nrequest_memory=100 MB\njob_type=transfer</param>
+	  <param id="nativeSpecification">getenv=True\n+remote_RequestCpus=1\n+remote_RequestMemory=100\njob_type=transfer</param>
 	</destination>
 
 	<destination id="condor_1C_100M_central" runner="drmaa">
-	  <param id="nativeSpecification">getenv=True\nrequest_cpus=1\nrequest_memory=100 MB\njob_type=localized</param>
+	  <param id="nativeSpecification">getenv=True\n+remote_RequestCpus=1\n+remote_RequestMemory=100\njob_type=localized</param>
 	</destination>
 	<destination id="condor_HPt" runner="drmaa">
-	  <param id="nativeSpecification">getenv=True\nrequirements = (TARGET.IsHarmonyPointTPUExecutor =?= True)\njob_type=localized</param>
+	  <param id="nativeSpecification">getenv=True\n+remote_requirements = (TARGET.IsHarmonyPointTPUExecutor =?= True)\njob_type=localized</param>
 	</destination>
     </destinations>
     <tools>
