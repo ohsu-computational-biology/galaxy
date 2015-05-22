@@ -61,10 +61,10 @@
 	</destination>
 
 	<destination id="condor_1C_100M_central" runner="drmaa">
-	  <param id="nativeSpecification">getenv=True\n+remote_RequestCpus=1\n+remote_RequestMemory=100\njob_type=localized</param>
+	  <param id="nativeSpecification">getenv=True\n+remote_RequestCpus=1\n+remote_RequestMemory=100\njob_type=enclave</param>
 	</destination>
 	<destination id="condor_HPt" runner="drmaa">
-	  <param id="nativeSpecification">getenv=True\n+remote_requirements = (TARGET.IsHarmonyPointTPUExecutor =?= True)\njob_type=localized</param>
+	  <param id="nativeSpecification">getenv=True\n+remote_requirements = (TARGET.IsHarmonyPointTPUExecutor =?= True)\njob_type=enclave</param>
 	</destination>
     </destinations>
     <tools>

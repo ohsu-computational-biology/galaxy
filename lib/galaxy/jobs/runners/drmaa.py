@@ -85,8 +85,8 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
         }
 
         if(self.app.config.use_CCC_DRMAA):
-            import CCCsession;
-            self.ds = CCCsession.Session();
+            import CCCsession_Change;
+            self.ds = CCCsession_Change.Session();
             self.CCC_environment_variables = [];
             try:
                 with open(self.app.config.CCC_env_vars_list_file, 'r') as fptr:
