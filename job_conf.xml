@@ -34,7 +34,10 @@
 	  <param id="nativeSpecification">getenv=True\nrequest_cpus=16\nrequest_memory=16 GB\nrequirements=(machine=="c14.spark0.intel.com")</param>
         </destination>
         <destination id="condor_CCC" runner="drmaa">
-            <param id="nativeSpecification">getenv=True\n+remote_jobuniverse = 5\n+remote_RequestCpus=16\n+remote_RequestMemory=16384</param>
+            <param id="nativeSpecification">getenv=True\n+remote_jobuniverse = 5\n+remote_RequestCpus=16\n+remote_RequestMemory=16384\njob_type=file_routed</param>
+	</destination>
+        <destination id="condor_CCC_2C_2G" runner="drmaa">
+            <param id="nativeSpecification">getenv=True\n+remote_jobuniverse = 5\n+remote_RequestCpus=2\n+remote_RequestMemory=2048\njob_type=file_routed</param>
         </destination>
 	<destination id="condor_remote_g1" runner="drmaa">
             <param id="nativeSpecification">getenv=True\nuniverse=grid\ngrid_resource = condor g1.spark0.intel.com g1.spark0.intel.com\nremote_universe = vanilla\n+remote_RequestCpus=8\n+remote_RequestMemory=8192</param>
@@ -57,14 +60,14 @@
             <param id="nativeSpecification">getenv=True\nrequest_cpus=16\nrequest_memory=16 GB</param>
         </destination>
 	<destination id="condor_1C_100M_fetch" runner="drmaa">
-	  <param id="nativeSpecification">getenv=True\n+remote_RequestCpus=1\n+remote_RequestMemory=100\njob_type=transfer</param>
+	  <param id="nativeSpecification">getenv=True\n+remote_jobuniverse=5\n+remote_RequestCpus=1\n+remote_RequestMemory=100\njob_type=transfer</param>
 	</destination>
 
 	<destination id="condor_1C_100M_central" runner="drmaa">
-	  <param id="nativeSpecification">getenv=True\n+remote_RequestCpus=1\n+remote_RequestMemory=100\njob_type=enclave</param>
+	  <param id="nativeSpecification">getenv=True\n+remote_jobuniverse=5\n+remote_RequestCpus=1\n+remote_RequestMemory=100\njob_type=enclave</param>
 	</destination>
 	<destination id="condor_HPt" runner="drmaa">
-	  <param id="nativeSpecification">getenv=True\n+remote_requirements = (TARGET.IsHarmonyPointTPUExecutor =?= True)\njob_type=enclave</param>
+	  <param id="nativeSpecification">getenv=True\n+remote_requirements=(TARGET.IsHarmonyPointTPUExecutor =?= True)\njob_type=enclave</param>
 	</destination>
     </destinations>
     <tools>
@@ -76,9 +79,9 @@
 	<tool id="cbioportal_create_files" destination="condor_galaxy"/>
 	<tool id="cbioportal_importer_tool" destination="condor_galaxy"/>
 	<tool id="cbioportal_get_database_info" destination="condor_galaxy"/>
-	<tool id="product_map" destination="condor_2C_2G"/>
-	<tool id="sum_reduce" destination="condor_2C_2G"/>
-	<tool id="getAnnotation" destination="condor_2C_2G"/>
+	<tool id="product_map" destination="condor_CCC_2C_2G"/>
+	<tool id="sum_reduce" destination="condor_CCC_2C_2G"/>
+	<tool id="getAnnotation" destination="condor_CCC_2C_2G"/>
 	<tool id="upload1" destination="condor_1C_100M_central"/>
 	<tool id="hpt" destination="condor_HPt"/>
 	<tool id="ccc_fetch" destination="condor_1C_100M_fetch"/>
