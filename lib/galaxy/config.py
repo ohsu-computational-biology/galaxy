@@ -325,6 +325,7 @@ class Configuration( object ):
         #CCC
         self.use_CCC_DRMAA = string_as_bool( kwargs.get( 'use_CCC_DRMAA', False ) );
         self.CCC_env_vars_list_file = kwargs.get( 'CCC_env_vars_list_file', 'contrib/intel_env_vars_list.txt' );
+        self.CCC_results_dir = kwargs.get( 'CCC_results_dir', self.job_working_directory );
         # Handle AWS-specific config options for backward compatibility
         if kwargs.get( 'aws_access_key', None) is not None:
             self.os_access_key = kwargs.get( 'aws_access_key', None )

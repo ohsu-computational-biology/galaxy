@@ -1142,6 +1142,24 @@ class JobWrapper( object ):
                         # Prior to fail we need to set job.state
                         job.set_state( final_job_state )
                         return self.fail( "Job %s's output dataset(s) could not be read" % job.id )
+            #Karthik: for "remote" datasets created on the central site, create symlinks to real file
+            path_on_central_site = None;
+            if is_remote_dataset_flag and not self.__link_file_check():
+                dataset_path = self.get_output_fnames()[dataset_assoc_loop_idx];
+                uuid_string = str(dataset_assoc.dataset.dataset.uuid);
+                CCC_results_dir = self.app.config.CCC_results_dir;
+                #FIXME: Should get path from DTS and not hard code
+                results_path = os.path.join(CCC_results_dir, uuid_string+'.o');
+                fetch_path = os.path.join(self.working_directory, uuid_string+'.o');
+                if(os.path.exists(results_path)):
+                    path_on_central_site = results_path;
+                elif(os.path.exists(fetch_path)):
+                    path_on_central_site = fetch_path;
+                if(path_on_central_site and os.stat(path_on_central_site).st_size > 0):
+                    if(os.path.exists(dataset_path.real_path)):
+                        os.remove(dataset_path.real_path);
+                    os.symlink(path_on_central_site, dataset_path.real_path);
+                    context['stdout'] = 'central_site';
             # should this also be checking library associations? - can a library item be added from a history before the job has ended? -
             # lets not allow this to occur
             # need to update all associated output hdas, i.e. history was shared with job running
