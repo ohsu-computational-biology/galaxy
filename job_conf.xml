@@ -64,7 +64,7 @@
 	</destination>
 
 	<destination id="condor_1C_100M_central" runner="drmaa">
-	  <param id="nativeSpecification">getenv=True\n+remote_jobuniverse=5\n+remote_RequestCpus=1\n+remote_RequestMemory=100\njob_type=enclave</param>
+	  <param id="nativeSpecification">getenv=True\n+remote_jobuniverse=5\n+remote_RequestCpus=1\n+remote_RequestMemory=100\njob_type=enclave\n+remote_requirements=(TARGET.IsHarmonyPointTPUExecutor =!= True)</param>
 	</destination>
 	<destination id="condor_HPt" runner="drmaa">
 	  <param id="nativeSpecification">getenv=True\n+remote_requirements=(TARGET.IsHarmonyPointTPUExecutor =?= True)\njob_type=enclave</param>
@@ -88,6 +88,7 @@
 	<tool id="beat_aml_rnaseq" destination="local"/>
 	<tool id="brenden_coulson" destination="local"/>
 	<tool id="icgc_genomes" destination="local"/>
+	<tool id="ga4gh" destination="condor_1C_100M_central"/>
     </tools>
     <limits>
 	<!-- Certain limits can be defined. -->

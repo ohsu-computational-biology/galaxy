@@ -3,6 +3,7 @@ PYTHON_2_7_PATH=/opt/python-2.7/
 export http_proxy=http://sparkdmz1:4000
 export https_proxy=${http_proxy}
 export ftp_proxy=${http_proxy}
+export no_proxy=cluster3.ccc.com,.cluster3.ccc.com,intel.com,.intel.com,10.0.0.0/8,192.168.0.0/16,localhost,127.0.0.0/8,134.134.0.0/16
 export GALAXY_RUN_ALL=1
 #Creating env variables for location of exe/jar files, to be used by xml/py files.
 GENOMICS_DIR=/opt/Genomics
