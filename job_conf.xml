@@ -67,7 +67,7 @@
 	  <param id="nativeSpecification">getenv=True\n+remote_jobuniverse=5\n+remote_RequestCpus=1\n+remote_RequestMemory=100\njob_type=enclave\n+remote_requirements=(TARGET.IsHarmonyPointTPUExecutor =!= True)</param>
 	</destination>
 	<destination id="condor_HPt" runner="drmaa">
-	  <param id="nativeSpecification">getenv=True\n+remote_requirements=(TARGET.IsHarmonyPointTPUExecutor =?= True)\njob_type=enclave</param>
+	  <param id="nativeSpecification">getenv=True\n+remote_jobuniverse=5\n+remote_RequestCpus=1\n+remote_RequestMemory=100\n+remote_requirements=(TARGET.IsHarmonyPointTPUExecutor =?= True)\njob_type=enclave</param>
 	</destination>
     </destinations>
     <tools>
