@@ -755,9 +755,6 @@ class JobWrapper( object ):
             self.app.object_store.create(job, base_dir='job_work', dir_only=True, extra_dir=str(self.job_id))
             self.working_directory = self.app.object_store.get_filename(job, base_dir='job_work', dir_only=True, extra_dir=str(self.job_id))
             log.debug('(%s) Working directory for job is: %s' % (self.job_id, self.working_directory))
-            #Delete file for uuid based dataset reference
-            if self.app.config.use_uuids_for_dataset_reference():
-                self.app.object_store.delete( data.dataset )
         except ObjectInvalid:
             raise Exception('Unable to create job working directory, job failure')
         self.dataset_path_rewriter = self._job_dataset_path_rewriter( self.working_directory )
