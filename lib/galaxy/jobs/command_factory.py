@@ -20,7 +20,8 @@ def build_command(
     include_metadata=False,
     include_work_dir_outputs=True,
     create_output_dataset_json=False,
-    remote_command_params={}
+    remote_command_params={},
+    extra_docker_volumes=None
 ):
     """
     Compose the sequence of commands necessary to execute a job. This will
@@ -59,7 +60,8 @@ def build_command(
             # and not copying workdir outputs back means on can be more restrictive
             # of where container can write to in some circumstances.
             run_in_container_command = container.containerize_command(
-                externalized_commands
+                externalized_commands,
+                extra_docker_volumes=extra_docker_volumes
             )
             commands_builder = CommandsBuilder( run_in_container_command )
         else:
