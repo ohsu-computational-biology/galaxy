@@ -252,6 +252,9 @@ class DefaultToolAction( object ):
                 trans.app.security_agent.set_all_dataset_permissions( data.dataset, output_permissions )
 
             object_store_populator.set_object_store_id( data )
+            #Delete file for uuid based dataset reference
+            if trans.app.config.use_uuids_for_dataset_reference():
+                object_store_populator.object_store.delete( data.dataset )
 
             # This may not be neccesary with the new parent/child associations
             data.designation = name
