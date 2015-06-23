@@ -25,7 +25,7 @@
 	[server:id] in universe_wsgi.ini.
 	-->
     </handlers>
-    <destinations default="condor_CCC">
+    <destinations default="docker_condor_CCC">
 	<!-- Destinations define details about remote resources and how jobs
 	should be executed on those remote resources.
 	-->
@@ -54,11 +54,16 @@
 	<destination id="condor_1C_100M" runner="drmaa">
 	  <param id="nativeSpecification">getenv=True\nrequest_cpus=1\nrequest_memory=100 MB</param>
 	</destination>
-        <destination id="docker_condor_16C_16G" runner="drmaa">
-            <param id="docker_enabled">true</param>
-            <param id="docker_volumes">$defaults</param>
-            <param id="nativeSpecification">getenv=True\nrequest_cpus=16\nrequest_memory=16 GB</param>
-        </destination>
+	<destination id="docker_condor_16C_16G" runner="drmaa">
+	  <param id="docker_enabled">true</param>
+	  <param id="docker_volumes">$defaults</param>
+	  <param id="nativeSpecification">getenv=True\nrequest_cpus=16\nrequest_memory=16 GB</param>
+	</destination>
+	<destination id="docker_condor_CCC" runner="drmaa">
+	  <param id="docker_enabled">true</param>
+	  <param id="docker_volumes">$defaults</param>
+	  <param id="nativeSpecification">getenv=True\n+remote_jobuniverse = 5\n+remote_RequestCpus=16\n+remote_RequestMemory=16384\njob_type=file_routed</param>
+	</destination>
 	<destination id="condor_1C_100M_fetch" runner="drmaa">
 	  <param id="nativeSpecification">getenv=True\n+remote_jobuniverse=5\n+remote_RequestCpus=1\n+remote_RequestMemory=100\njob_type=transfer</param>
 	</destination>
