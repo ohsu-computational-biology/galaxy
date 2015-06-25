@@ -94,6 +94,7 @@
 	<tool id="ccc_fetch" destination="condor_1C_100M_fetch"/>
 	<tool id="genomes" destination="condor_1C_100M_central_gateway"/>
 	<tool id="rnaseq" destination="condor_1C_100M_central_gateway"/>
+	<tool id="concatenate_central" destination="condor_1C_100M_central_gateway"/>
 	<tool id="retrieveThumbnails" destination="condor_1C_100M_central_gateway"/>
 	<tool id="clinical_pathology_images" destination="condor_1C_100M_central_gateway"/>
 	<tool id="icgc_genomes" destination="condor_1C_100M_central_gateway"/>
