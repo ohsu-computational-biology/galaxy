@@ -244,6 +244,26 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
             jt.nativeSpecification = jt.nativeSpecification.replace('\n', '|');        #CCC DRMAA does not like newline separators
             jt.outputPath = "%s" % ajs.output_file      #CCC DRMAA does not like : at the beginning, non-compliant with standard
             jt.errorPath = "%s" % ajs.error_file
+	    #HACK FOR DOCKER
+	    docker_script_file = job_wrapper.working_directory+'/tool_script.sh';
+	    if(os.path.exists(docker_script_file)):
+		subprocess.call('rsync -a '+ajs.job_file+' '+ajs.job_file+'.bak', shell=True);
+		fptr = open(ajs.job_file+'.bak','rb');
+		wfptr = open(ajs.job_file, 'wb');
+		#Print first 4 lines
+		for i in range(4):
+		    wfptr.write(fptr.readline());
+		#printf command that prints the text inside tool_script.sh file
+		pid = subprocess.Popen('cat '+docker_script_file, shell=True, stdout=subprocess.PIPE);
+		stdout_string = pid.communicate()[0];
+		stdout_string = stdout_string.replace('\'', '\\\'');
+		wfptr.write('printf $\''+stdout_string+'\' > '+docker_script_file+'\n');
+		#Rest of the file
+		for line in fptr:
+		    wfptr.write(line);
+		wfptr.close();
+		fptr.close();
+
 
         jt.nativeSpecification = jt.nativeSpecification + '\n';
         log.debug('nativeSpecification :\n'+jt.nativeSpecification);
