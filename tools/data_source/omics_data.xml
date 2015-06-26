@@ -17,14 +17,11 @@
   </description>
   
   <command>
-    <!--This is the YAML file containing the LabKey configuration. -->
+    <!--This is the YAML file containing the LabKey configuration -->
     export CONFIG_FILE=${__app__.config.tool_data_path}/shared/labkey/omics.yml;
-    echo \$CONFIG_FILE;
 
-    <!-- The UI is expecting our JSON dataset to be avaiable at
-         data/payload.json -->
+    <!-- The UI is expecting our JSON dataset to be avaiable at data/payload.json -->
     export JSON_OUTPUT=${html_file.files_path}/data/payload.json;
-    echo \$JSON_OUTPUT;
 
     <!-- Copy the omics query UI tool to the corresponding directory. Note that
          we also copy index.html to our html_file path. -->
