@@ -1,0 +1,37 @@
+default:
+
+    project: ccc
+    schema: lists
+    query_name: genome_data
+
+    email: $LABKEY_USERNAME
+    password: $LABKEY_PASSWORD
+
+    aliases:
+      specimen_id/project_code: project_name
+      specimen_id/donor_id: donor_id
+      specimen_id/disease_state: specimen_classification
+      specimen_id/specimen_type: specimen_type
+      specimen_id/donor_gender: donor_gender
+      fastq_forward: fastq_forward_ccc_did
+      fastq_reverse: fastq_reverse_ccc_did
+
+    columns:
+      - project_name
+      - donor_id
+      - specimen_id
+      - specimen_classification
+      - speciment_type
+      - donor_gender
+      - fastq_forward_ccc_did
+      - fastq_reverse_ccc_did
+
+servers:
+
+  - host: http://localhost:9004/labkey/
+    custom_columns:
+      site_name: Austin
+
+  - host: http://localhost:9004/labkey/
+    custom_columns:
+      site_name: Boston

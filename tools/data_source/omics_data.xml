@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<tool name="Omics Data" id="get_omics_data">
+  <!--
+      This tool assumes that there's a path ($OMICS_QUERY_UI_TOOL) that has
+      two directories:
+
+            - "html": the app for the UI tool that's copied to the output
+              of the tool.
+
+            - "venv": A virtual environment for installing dependencies from
+              $GALAXY_ROOT/tool-data/shared/python_requirements/omics_data.txt
+  -->
+
+  <description>
+    Query omics data across available DMS sources.
+  </description>
+  
+  <command>
+    <!--This is the YAML file containing the LabKey configuration. -->
+    export CONFIG_FILE=${__app__.config.tool_data_path}/shared/labkey/omics.yml;
+    echo \$CONFIG_FILE;
+
+    <!-- The UI is expecting our JSON dataset to be avaiable at
+         data/payload.json -->
+    export JSON_OUTPUT=${html_file.files_path}/data/payload.json;
+    echo \$JSON_OUTPUT;
+
+    <!-- Copy the omics query UI tool to the corresponding directory. Note that
+         we also copy index.html to our html_file path. -->
+    mkdir -p ${html_file.files_path}/data;
+    cp -R \$OMICS_QUERY_UI_TOOL/html/* ${html_file.files_path};
+    cp -R \$OMICS_QUERY_UI_TOOL/html/index.html ${html_file};
+
+    <!-- Call the LabKey query tool. -->
+    source \$OMICS_QUERY_UI_TOOL/venv/bin/activate;
+    labkey --config-file=\$CONFIG_FILE --output-format=json > \$JSON_OUTPUT;
+  </command>
+
+  <outputs>
+    <data format="html" name="html_file" label="Omics data selection tool" />
+  </outputs>    
+
+</tool>
