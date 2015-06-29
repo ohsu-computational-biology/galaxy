@@ -115,6 +115,9 @@
   <section id="retrieveThumbnails" name="OMERO Visualization Tool">
     <tool file="omero/retrieveThumbnails.xml" />
   </section>
+  <section id="histogram" name="Image Analysis Histogram">
+    <tool file="histogram/histogram.xml" />
+  </section>
   <section id="scores" name="Get Genomic Scores">
     <tool file="filters/wiggle_to_simple.xml" />
     <tool file="stats/aggregate_binned_scores_in_intervals.xml" />
