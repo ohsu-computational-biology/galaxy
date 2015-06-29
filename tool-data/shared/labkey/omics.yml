@@ -26,6 +26,9 @@ default:
       - fastq_forward_ccc_did
       - fastq_reverse_ccc_did
 
+    column_order:
+      - site_name
+
 servers:
 
   - host: http://localhost:9004/labkey/
