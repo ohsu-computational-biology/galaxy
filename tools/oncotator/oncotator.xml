@@ -15,7 +15,7 @@
     </requirements>
     <command>
         source \${ONCOTATOR_PATH}/activate;
-        python oncotator.py
+        python $__tool_directory__/oncotator.py
         ###if $datasource
         --db-dir "\${ONCOTATOR_DB_SOURCE}" ##$datasource
         ###end if
