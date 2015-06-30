@@ -257,6 +257,7 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
 		pid = subprocess.Popen('cat '+docker_script_file, shell=True, stdout=subprocess.PIPE);
 		stdout_string = pid.communicate()[0];
 		stdout_string = stdout_string.replace('\'', '\\\'');
+		stdout_string = stdout_string.replace('%', '%%');
 		wfptr.write('printf $\''+stdout_string+'\' > '+docker_script_file+'\n');
 		#Rest of the file
 		for line in fptr:
