@@ -1,0 +1,19 @@
+<tool id="histogram" name="Image Analysis Histogram" version="1.0.0">
+    <description>Visualization of CellProfiler Results</description>
+    <command>
+        source \$HISTOGRAM_VISUALIZATION/.ccc/bin/activate;
+        python $__tool_directory__/imaging_histogram.py -i $input -o $output
+    </command>
+    <inputs>
+        <param name="input" type="data" label="input"/>
+    </inputs>
+    <outputs>
+        <data format="png" name="output"/>
+    </outputs>
+    <help>
+.. class:: infomark
+        
+**CellProfiler Result Visualization**
+
+    </help>
+</tool>

@@ -20,6 +20,7 @@ export CP_PATH=$CCC_SYNC_DIR/tools/cellprofiler/cp_pipeline
 export LABKEY_USERNAME=ccc@ccc.com
 export LABKEY_PASSWORD=Intel123
 export OMERO_IMAGE_SELECTION=$CCC_SYNC_DIR/tools/omero
+export HISTOGRAM_VISUALIZATION=$CCC_SYNC_DIR/tools/histogram
 #END FIXME
 export SEATTLESEQ_GETANNOTATION_JAR_PATH=$GENOMICS_DIR/annotation/getAnnotation/project/
 export SEATTLESEQ_WRITEGENOTYPE_JAR_PATH=$GENOMICS_DIR/annotation/writeGenotype/project/
