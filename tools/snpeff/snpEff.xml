@@ -237,7 +237,7 @@
             </help>
             <validator type="regex" message="No whitespace allowed">^\S*$</validator>
         </param>
-        <param name="generate_stats" type="boolean" truevalue="" falsevalue="-noStats" checked="true" label="Produce Summary Stats"/>
+        <param name="generate_stats" type="boolean" truevalue="" falsevalue="-noStats" checked="false" label="Produce Summary Stats"/>
         <param name="noLog" type="boolean" truevalue="-noLog" falsevalue="" checked="true" label="Do not report usage statistics to server"/>
     </inputs>
     <outputs>
