@@ -296,7 +296,10 @@ def __populate_tool_state(step, tool_state):
 
 
 def main(argv):
-    print json.dumps(yaml_to_workflow(argv[0]))
+    fptr = open(argv[1], 'rb');
+    yaml_string = fptr.read();
+    fptr.close();
+    print json.dumps(yaml_to_workflow(yaml_string))
 
 
 if __name__ == "__main__":

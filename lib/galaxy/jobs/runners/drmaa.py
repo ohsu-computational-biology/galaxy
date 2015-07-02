@@ -10,6 +10,7 @@ import subprocess
 import sys
 import time
 import pwd
+import uuid
 
 from galaxy import eggs
 from galaxy import model
@@ -65,7 +66,7 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
         # We foolishly named this file the same as the name exported by the drmaa
         # library... 'import drmaa' imports itself.
         drmaa = __import__( "drmaa" )
-
+        
         # Subclasses may need access to state constants
         self.drmaa_job_states = drmaa.JobState
 
@@ -83,13 +84,23 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
             drmaa.JobState.FAILED: 'job finished, but failed',
         }
 
-        self.ds = drmaa.Session()
+        if(self.app.config.use_CCC_DRMAA):
+            import CCCsession_Change;
+            self.ds = CCCsession_Change.Session();
+            self.CCC_environment_variables = [];
+            try:
+                with open(self.app.config.CCC_env_vars_list_file, 'r') as fptr:
+                    self.CCC_environment_variables = fptr.read().splitlines();
+            except:
+                log.error('Could not open file listing the environment variables to pass to the CCC WFM : '+self.app.config.CCC_env_vars_list_file);
+        else:
+            self.ds = drmaa.Session()
         self.ds.initialize()
 
         # external_runJob_script can be None, in which case it's not used.
         self.external_runJob_script = app.config.drmaa_external_runjob_script
         self.external_killJob_script = app.config.drmaa_external_killjob_script
-	self.external_chown_script = app.config.external_chown_script;
+        self.external_chown_script = app.config.external_chown_script;
         self.userid = None
 
         self._init_monitor_thread()
@@ -118,9 +129,9 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
     def queue_job( self, job_wrapper ):
         """Create job script and submit it to the DRM"""
         
-	#Was useful when DRMAA implementation in Condor seems to be buggy
-	#Fixed DRMAA implementation directly - useless now
-	append_to_command = None;
+        #Was useful when DRMAA implementation in Condor seems to be buggy
+        #Fixed DRMAA implementation directly - useless now
+        append_to_command = None;
 
         # prepare the job
         include_metadata = asbool( job_wrapper.job_destination.params.get( "embed_metadata_in_job", True) )
@@ -154,7 +165,7 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
         native_spec = job_destination.params.get('nativeSpecification', None)
         if native_spec is not None:
             jt.nativeSpecification = native_spec
-	    jt.nativeSpecification = jt.nativeSpecification.replace('\\n','\n');
+            jt.nativeSpecification = jt.nativeSpecification.replace('\\n','\n');
 
         # fill in the DRM's job run template
         script = self.get_job_file(job_wrapper, exit_code_path=ajs.exit_code_file)
@@ -188,13 +199,74 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
         if(jt.nativeSpecification == None):
             jt.nativeSpecification = '';
         #Directory from which to start job - required when transferring scripts etc to remote sites
-        jt.workingDirectory = job_wrapper.working_directory
+        jt.workingDirectory = job_wrapper.working_directory;
         #Username as which to run the job
-        if (self.external_chown_script != None):
-            jt.nativeSpecification = jt.nativeSpecification + '\nsubmit_as_user=' + job_wrapper.user_system_pwent[0];
-        jt.nativeSpecification = jt.nativeSpecification + '\n';
-        log.debug('NATIVE : '+jt.nativeSpecification);
+        if (self.external_chown_script != None or self.app.config.use_CCC_DRMAA):
+            if(self.external_chown_script != None):
+                jt.nativeSpecification = jt.nativeSpecification + '\nsubmit_as_user=' + job_wrapper.user_system_pwent[0];
+            else:
+                jt.nativeSpecification += '\nsubmit_as_user=' + job_wrapper.galaxy_system_pwent[0];
 
+        #Should transfer whole working directory when job is run on remote datasets
+        if(self.app.config.use_remote_datasets):
+            if(self.app.config.use_CCC_DRMAA):
+                jt.nativeSpecification += '\n' + 'TransferInput = '+job_wrapper.working_directory + os.sep;
+                jt.nativeSpecification += '\n' + 'ShouldTransferFiles = IF_NEEDED';
+            else:
+                jt.nativeSpecification += '\n' + 'transfer_input_files = '+job_wrapper.working_directory + os.sep;
+                jt.nativeSpecification += '\n' + 'should_transfer_files = YES';
+
+        #For CCC
+        if(self.app.config.use_CCC_DRMAA):
+            jt.nativeSpecification += '\noutput_aggregated=False\noutput_aggregation_type=merge';
+            #FIXME: CCC DRMAA code assumes all UUIDs are bounded by [], fix
+	    input_string_uuid_list = job_wrapper.get_input_string_uuids();
+	    if(len(input_string_uuid_list) == 0):
+	      jt.nativeSpecification += '\n' + 'input_CCC_DID_list=' + '[]'; 
+	    else:
+	      jt.nativeSpecification = jt.nativeSpecification + '\n' + 'input_CCC_DID_list=' + ','.join(map(lambda x:'[' + x + ']', 
+		input_string_uuid_list));
+	    output_string_uuid_list = job_wrapper.get_output_string_uuids();
+	    if(len(output_string_uuid_list) == 0 or job_wrapper.get_tool_id() == 'upload1'):
+	      jt.nativeSpecification += '\n' + 'output_CCC_DID_list=' + '[]';
+	    else:
+	      jt.nativeSpecification = jt.nativeSpecification + '\n' + 'output_CCC_DID_list=' + ','.join(map(lambda x:'[' + x + ']',
+		output_string_uuid_list));
+            jt.nativeSpecification = jt.nativeSpecification + '\n' + 'tool_id=' + job_wrapper.get_tool_id();
+            workflow_tuple = job_wrapper.get_workflow_invocation_info();
+            if(workflow_tuple):
+                (workflow_name, workflow_id, workflow_invocation_id) = workflow_tuple;
+                jt.nativeSpecification = jt.nativeSpecification + '\n' + 'workflow_name=' + workflow_name;
+                jt.nativeSpecification = jt.nativeSpecification + '\n' + 'workflow_id=' + str(workflow_id);
+                jt.nativeSpecification = jt.nativeSpecification + '\n' + 'workflow_invocation_id=' + str(workflow_invocation_id);
+            #Environment variables to pass to CCC
+            jt.nativeSpecification += '\nenvironment_vars=' + ','.join(self.CCC_environment_variables);
+            jt.nativeSpecification = jt.nativeSpecification.replace('\n', '|');        #CCC DRMAA does not like newline separators
+            jt.outputPath = "%s" % ajs.output_file      #CCC DRMAA does not like : at the beginning, non-compliant with standard
+            jt.errorPath = "%s" % ajs.error_file
+	    #HACK FOR DOCKER
+	    docker_script_file = job_wrapper.working_directory+'/tool_script.sh';
+	    if(os.path.exists(docker_script_file)):
+		subprocess.call('rsync -a '+ajs.job_file+' '+ajs.job_file+'.bak', shell=True);
+		fptr = open(ajs.job_file+'.bak','rb');
+		wfptr = open(ajs.job_file, 'wb');
+		#Print first 4 lines
+		for i in range(4):
+		    wfptr.write(fptr.readline());
+		#printf command that prints the text inside tool_script.sh file
+		pid = subprocess.Popen('cat '+docker_script_file, shell=True, stdout=subprocess.PIPE);
+		stdout_string = pid.communicate()[0];
+		stdout_string = stdout_string.replace('\'', '\\\'');
+		wfptr.write('printf $\''+stdout_string+'\' > '+docker_script_file+'\n');
+		#Rest of the file
+		for line in fptr:
+		    wfptr.write(line);
+		wfptr.close();
+		fptr.close();
+
+
+        jt.nativeSpecification = jt.nativeSpecification + '\n';
+        log.debug('nativeSpecification :\n'+jt.nativeSpecification);
 
         # runJob will raise if there's a submit problem
         if self.external_runJob_script is None:
@@ -340,12 +412,12 @@ class DRMAAJobRunner( AsynchronousJobRunner ):
             ext_id = job.get_job_runner_external_id()
             assert ext_id not in ( None, 'None' ), 'External job id is None'
             if self.external_killJob_script is None:
-		#Karthik: pass username through ext_id - custom DRMAA library parses username correctly
-		username = pwd.getpwnam( job.user.email.split('@')[0] )[0];
-	        assert username not in ( None, 'None' ), 'Username is None';
-		if(self.external_chown_script != None):
-		    ext_id = username + ':' + ext_id;
-		log.debug('Job id passed to DRMAA control TERMINATE '+ext_id);
+                #Karthik: pass username through ext_id - custom DRMAA library parses username correctly
+                username = pwd.getpwnam( job.user.email.split('@')[0] )[0];
+                assert username not in ( None, 'None' ), 'Username is None';
+                if(self.external_chown_script != None):
+                    ext_id = username + ':' + ext_id;
+                log.debug('Job id passed to DRMAA control TERMINATE '+ext_id);
                 self.ds.control( ext_id, drmaa.JobControlAction.TERMINATE )
             else:
                 # FIXME: hardcoded path

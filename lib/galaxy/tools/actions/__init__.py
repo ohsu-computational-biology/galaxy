@@ -239,6 +239,11 @@ class DefaultToolAction( object ):
             else:
                 ext = determine_output_format( output, wrapped_params.params, inp_data, input_ext )
                 data = trans.app.model.HistoryDatasetAssociation( extension=ext, create_dataset=True, sa_session=trans.sa_session )
+                #Copy tools
+                if(tool.tool_type == 'copy_dataset_tool'):
+                    #Same dataset as input - set UUID same as output
+                    input_dataset = inp_data.values()[0].dataset;
+                    data.dataset.uuid = input_dataset.uuid;
                 if output.hidden:
                     data.visible = False
                 # Commit the dataset immediately so it gets database assigned unique id
@@ -247,6 +252,9 @@ class DefaultToolAction( object ):
                 trans.app.security_agent.set_all_dataset_permissions( data.dataset, output_permissions )
 
             object_store_populator.set_object_store_id( data )
+            #Delete file for uuid based dataset reference
+            if trans.app.config.use_uuids_for_dataset_reference():
+                object_store_populator.object_store.delete( data.dataset )
 
             # This may not be neccesary with the new parent/child associations
             data.designation = name

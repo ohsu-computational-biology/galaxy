@@ -22,6 +22,8 @@ database/tmp
 database/*.sqlite
 database/openid_consumer_cache
 database/dataset_library_import
+database/*
+database/HPt
 
 # Python bytecode
 *.pyc
