@@ -38,4 +38,3 @@ export BCFTOOLS=/home/karthikg/broad/non_variant_db/bcftools/bcftools
 export TILEDB_IMPORT_EXE=/home/karthikg/broad/non_variant_db/variantDB/TileDB/example/bin/gt_example_loader
 export GCC49_PREFIX_PATH=/opt/gcc-4.9.1
 export SCATTER_GATHER_JAR_PATH=$GENOMICS_DIR/ohsu/dnapipeline/ScatterGather-1.0.0.jar
-export OMICS_QUERY_UI_TOOL=/cluster_share/ccc_sync/tools/omics-query-tool
