@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<tool name="Omics Data" id="get_omics_data">
+  <!--
+      This tool assumes that there's a path ($OMICS_QUERY_UI_TOOL) that has
+      two directories:
+
+            - "html": the app for the UI tool that's copied to the output
+              of the tool.
+
+            - "venv": A virtual environment for installing dependencies from
+              $GALAXY_ROOT/tool-data/shared/python_requirements/omics_data.txt
+  -->
+
+  <description>
+    Query omics data across available DMS sources.
+  </description>
+  
+  <command>
+    <!-- The UI is expecting our JSON dataset to be avaiable at data/payload.json -->
+    export JSON_OUTPUT=${html_file.files_path}/data/payload.json;
+
+    <!-- Copy the omics query UI tool to the corresponding directory. Note that
+         we also copy index.html to our html_file path. -->
+    mkdir -p ${html_file.files_path}/data;
+    cp -R \$OMICS_QUERY_UI_TOOL/html/* ${html_file.files_path};
+    cp -R \$OMICS_QUERY_UI_TOOL/html/index.html ${html_file};
+
+    java -jar $__tool_directory__/labkeyMultiSiteQuery.jar 
+        --username \$LABKEY_USERNAME 
+        --password \$LABKEY_PASSWORD 
+        --xml $__tool_directory__/omics_data_conf.xml
+        --includeSiteNameInOutput
+        --output tmp.tsv;
+
+    <!-- Activate our virtual environment -->
+    source \$OMICS_QUERY_UI_TOOL/venv/bin/activate;
+
+    <!-- Convert the output tsv to json -->
+    python $__tool_directory__/data_file_converter.py --from tsv --to json tmp.tsv > \$JSON_OUTPUT;
+
+  </command>
+
+  <outputs>
+    <data format="html" name="html_file" label="Omics data selection tool" />
+  </outputs>    
+
+</tool>
