@@ -1,3 +1,4 @@
-192.168.100.102:3000
-g2.spark0.intel.com:3001
-application-0-0:3001
+https://10.73.127.6:3001
+https://10.73.127.10:3001
+http://g2.spark0.intel.com:3001
+http://g1.spark0.intel.com:3001
