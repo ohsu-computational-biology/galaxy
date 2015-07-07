@@ -17,6 +17,7 @@ export CP_PATH=/cluster_share/cp_pipeline
 export LABKEY_USERNAME=ccc@ccc.com
 export LABKEY_PASSWORD=Intel123
 export OMERO_IMAGE_SELECTION=/cluster_share/omero
+export OMICS_QUERY_UI_TOOL=/cluster_share/omics-query-tool
 export SEATTLESEQ_GETANNOTATION_JAR_PATH=/opt/Genomics/annotation/getAnnotation/project/
 export SEATTLESEQ_WRITEGENOTYPE_JAR_PATH=/opt/Genomics/annotation/writeGenotype/project/
 export MUTECT_JAR_PATH=$GENOMICS_DIR/ohsu/dnapipeline/mutect-1.1.7.jar
