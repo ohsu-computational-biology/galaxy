@@ -6,7 +6,7 @@ export ftp_proxy=${http_proxy}
 export GALAXY_RUN_ALL=1
 #Creating env variables for location of exe/jar files, to be used by xml/py files.
 GENOMICS_DIR=/opt/Genomics
-export BWA_DIR=$GENOMICS_DIR/ohsu/dnapipeline/bwa-0.7.4
+export BWA_DIR=$GENOMICS_DIR/ohsu/dnapipeline/bwa-0.7.12
 export BWA_EXE_PATH=$BWA_DIR/bwa
 export SAMTOOLS_DIR=$GENOMICS_DIR/ohsu/dnapipeline/samtools-0.1.19
 export SAMTOOLS_EXE_PATH=$SAMTOOLS_DIR/samtools

@@ -31,6 +31,7 @@ def __main__():
     parser.add_option( '-s', '--fileSource', help='Whether to use a previously indexed reference sequence or one form history (indexed or history)' )
     parser.add_option( '-D', '--dbkey', help='Dbkey for reference genome' )
 
+    parser.add_option( '-i', '--intel_optimization', action='store_true', help='Intel Optimization flag for BWA-Mem' )
     parser.add_option( '-k', '--minSeedLength', type=int, help='Minimum seed length [19]' )
     parser.add_option( '-w', '--bandWidth', type=int, help='Band width for banded alignment [100]' )
     parser.add_option( '-d', '--offDiagonal', type=int, help='Off-diagonal X-dropoff [100]' )
@@ -145,10 +146,13 @@ def __main__():
     # set up aligning and generate aligning command args
     start_cmds = "bwa mem -t %s" % options.threads
     #if False:
+    # Optimization flag    
+    if options.intel_optimization:
+        start_cmds += ' -f'
     if options.interPairEnd:
         start_cmds += ' -p'
     if options.params != 'pre_set':
-	if options.minSeedLength is not None:
+        if options.minSeedLength is not None:
 	    start_cmds += " -k %d" % options.minSeedLength
 	if options.bandWidth is not None:
 	    start_cmds += " -w %d" % options.bandWidth
@@ -219,6 +223,7 @@ def __main__():
         try:
             tmp = tempfile.NamedTemporaryFile( dir=tmp_dir ).name
             tmp_stderr = open( tmp, 'wb' )
+            print cmd
             proc = subprocess.Popen( args=cmd, shell=True, cwd=tmp_dir, stderr=tmp_stderr.fileno() )
             returncode = proc.wait()
             tmp_stderr.close()
