@@ -254,11 +254,11 @@
 	    <tool file="gatk/depth_of_coverage.xml"/>
 	    <tool file="gatk/variant_filtration.xml"/>
 	    <tool file="gatk/variant_select.xml" />
-    <label id="Picard" text="Picard version 1.110"/>
-	    <tool file="picard/rgPicardMarkDups.xml" />
+   <label id="Picard" text="Picard version 1.135"/>
+	    <tool file="picard/picard_MarkDuplicates.xml" />
 	    <tool file="picard/picard_SamToFastq.xml" />
-	    <tool file="picard/rgPicardSamFormatConverter.xml" />
-	    <tool file="picard/rgPicardSortSam.xml" />
+	    <tool file="picard/picard_SamFormatConverter.xml" />
+	    <tool file="picard/picard_SortSam.xml" />
     <label id="BICSeq" text="BICSeq" />
 	    <tool file="Suzi_pipeline/Bic-Seq_samtools.xml" />
 	    <tool file="Suzi_pipeline/Bic-Seq.xml" /> 
