@@ -14,7 +14,7 @@
      help="Entrez ID column number in MAF file. Default:1"/>
   </inputs>
   <outputs>
-    <data format="html" name="out_file" label="CIViC Summary with links to webpage."/>
+    <data format="html" name="out_file" label="${tool.name} on ${on_string}: Summary with links to webpage."/>
   </outputs>
   <tests>
     <test>

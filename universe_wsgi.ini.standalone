@@ -554,7 +554,7 @@ log_level = DEBUG
 # By default, all tool output served as 'text/html' will be sanitized
 # thoroughly. This can be disabled if you have special tools that require
 # unaltered output.
-#sanitize_all_html = True
+sanitize_all_html = False
 
 # By default Galaxy will serve non-HTML tool output that may potentially
 # contain browser executable JavaScript content as plain text. This will for
