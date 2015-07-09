@@ -46,3 +46,4 @@ export BCFTOOLS=$CCC_SYNC_DIR/tools/bcftools/bcftools
 export TILEDB_IMPORT_EXE=$CCC_SYNC_DIR/tools/TileDB/example/bin/gt_example_loader
 export GCC49_PREFIX_PATH=/opt/sync/softwares/compilers/gcc-4.9.1/
 export SCATTER_GATHER_JAR_PATH=$GENOMICS_DIR/ohsu/dnapipeline/ScatterGather-1.0.0.jar
+export OMICS_QUERY_UI_TOOL=$CCC_SYNC_DIR/tools/omics-query-tool
