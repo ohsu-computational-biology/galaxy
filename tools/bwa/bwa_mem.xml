@@ -1,6 +1,6 @@
-<tool id="bwa_mem" name="BWA-MEM" version="0.7.9">
+<tool id="bwa_mem" name="BWA-MEM v0.7.12" version="0.7.12">
   <requirements>
-    <requirement type="package" version="0.7.9"> </requirement>
+    <requirement type="package" version="0.7.12"> </requirement>
     <container type="docker">ccc.docker/bwa</container>
   </requirements>
   <description>Map low-divergent sequences against a large reference genome.</description>
@@ -30,6 +30,11 @@
 
       ## output file
       --output="${output}"
+
+      ## Flag for intel optimization
+      #if $intel_optimization
+        --intel_optimization
+      #end if
 
       ## run parameters
       --genAlignType="${paired.sPaired}"
@@ -138,6 +143,7 @@
         <param name="rfastq" type="data" format="fastq,fastqsanger,fastqillumina" label="Select Reverse FASTQ file" help="FASTQ with either Sanger-scaled quality values (fastqsanger) or Illumina-scaled quality values (fastqillumina)" />
       </when>
     </conditional>
+    <param name="intel_optimization" type="boolean" checked="false" label="Intel Optimization flag for BWA (-f)" />
     <conditional name="params">
       <param name="source_select" type="select" label="BWA settings to use" help="For most mapping needs use Commonly Used settings. If you want full control use Full Parameter List">
         <option value="pre_set">Commonly Used</option>

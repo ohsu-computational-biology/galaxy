@@ -7,12 +7,12 @@ export no_proxy=cluster3.ccc.com,.cluster3.ccc.com,intel.com,.intel.com,10.0.0.0
 export GALAXY_RUN_ALL=1
 #Creating env variables for location of exe/jar files, to be used by xml/py files.
 GENOMICS_DIR=/opt/Genomics
-export BWA_DIR=$GENOMICS_DIR/ohsu/dnapipeline/bwa-0.7.4
+export BWA_DIR=$GENOMICS_DIR/ohsu/dnapipeline/bwa-0.7.12
 export BWA_EXE_PATH=$BWA_DIR/bwa
 export SAMTOOLS_DIR=$GENOMICS_DIR/ohsu/dnapipeline/samtools-0.1.19
 export SAMTOOLS_EXE_PATH=$SAMTOOLS_DIR/samtools
 export SAMTOOLS_v020_EXE_PATH=$GENOMICS_DIR/ohsu/dnapipeline/samtools/samtools/samtools
-export PICARD_PATH=$GENOMICS_DIR/ohsu/dnapipeline/picard-tools-1.110
+export PICARD_PATH=$GENOMICS_DIR/ohsu/dnapipeline/picard-tools-1.135/dist
 export GATK_JAR_PATH=/opt/gsa-unstable/target/GenomeAnalysisTK.jar
 export CP_PATH=/cluster_share/cp_pipeline
 export LABKEY_USERNAME=ccc@ccc.com
