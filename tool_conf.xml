@@ -238,7 +238,7 @@
     <tool file="sum/sum_reduce.xml"/>
   </section>
   <section id="DNA_sequencing" name="DNA sequencing tools">
-    <label id="BWA" text="BWA-MEM 0.7.9a" />
+    <label id="BWA" text="BWA-MEM 0.7.12" />
 	    <tool file="bwa/bwa_mem.xml" />
     <label id="Samtools" text="Samtools version 0.1.19"/>
 	    <tool file="sam_to_bam/sam_to_bam.xml" />
