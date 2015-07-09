@@ -8,12 +8,12 @@ GENOMICS_DIR=/opt/sync/Genomics
 CCC_SYNC_DIR=/cluster_share/ccc_sync
 PYTHON_2_7_PATH=$CCC_SYNC_DIR/tools/galaxy/venv
 source $PYTHON_2_7_PATH/bin/activate
-export BWA_DIR=$GENOMICS_DIR/ohsu/dnapipeline/bwa-0.7.4
+export BWA_DIR=$GENOMICS_DIR/ohsu/dnapipeline/bwa-0.7.12
 export BWA_EXE_PATH=$BWA_DIR/bwa
 export SAMTOOLS_DIR=$GENOMICS_DIR/ohsu/dnapipeline/samtools-0.1.19
 export SAMTOOLS_EXE_PATH=$SAMTOOLS_DIR/samtools
 export SAMTOOLS_v020_EXE_PATH=$GENOMICS_DIR/ohsu/dnapipeline/samtools/samtools/samtools
-export PICARD_PATH=$GENOMICS_DIR/ohsu/dnapipeline/picard-tools-1.110
+export PICARD_PATH=$GENOMICS_DIR/ohsu/dnapipeline/picard-tools-1.135/dist
 export GATK_JAR_PATH=$GENOMICS_DIR/GATK-3.2/target/GenomeAnalysisTK.jar
 #FIXME
 export CP_PATH=$CCC_SYNC_DIR/tools/cellprofiler/cp_pipeline
