@@ -270,6 +270,7 @@
 	    <tool file="picard/picard_SamToFastq.xml" />
 	    <tool file="picard/picard_SamFormatConverter.xml" />
 	    <tool file="picard/picard_SortSam.xml" />
+	    <tool file="picard/picard_MergeSamFiles.xml" />
     <label id="BICSeq" text="BICSeq" />
 	    <tool file="Suzi_pipeline/Bic-Seq_samtools.xml" />
 	    <tool file="Suzi_pipeline/Bic-Seq.xml" /> 
