@@ -1,0 +1,67 @@
+<tool id="picard_SamFormatConverter" name="SamFormatConverter" version="1.135.0">
+    
+  <description>Converts SAM/BAM to BAM/SAM formats</description>
+  
+  <requirements>
+    <requirement type="package" version="1.135.0">picard</requirement>
+    <container type="docker">ccc.docker/picard:latest</container>
+  </requirements>
+  
+  <macros>
+    <import>picard_macros.xml</import>
+  </macros>
+  
+  <command>
+    @java_options@
+    java -jar \$PICARD_PATH/picard.jar
+    SamFormatConverter
+    INPUT="${inputFile}"
+    OUTPUT="${outFile}"
+    QUIET=false
+    VERBOSITY=ERROR
+  </command>
+  
+  <inputs>
+    <param name="inputFile" type="data" format="sam,bam" label="Select SAM/BAM dataset or dataset collection" help="If empty, upload or import a SAM/BAM dataset"/>
+    <expand macro="VS" />
+    <expand macro="Intel_Optimization" />    
+  </inputs>
+  
+  <outputs>
+    <data name="outFile" format="bam" label="${tool.name} on ${on_string}: Converted file">
+    </data>
+  </outputs>
+  
+  <stdio>
+    <exit_code range="1:"  level="fatal"/>
+  </stdio>
+  
+  <tests>
+    <test>
+      <param name="inputFile" ftype="bam" value="picard_SamFormatConverter.sam" />
+      <output name="outFile" file="picard_SamFormatCoverter.bam" ftype="bam" />
+    </test>
+  </tests>
+  
+  <help>
+
+.. class:: infomark
+
+**Purpose**
+
+Convert a BAM file to a SAM file, or SAM to BAM.
+
+@dataset_collections@
+
+@description@
+
+INPUT=File
+I=File                        The BAM or SAM file to parse.  Required.
+
+OUTPUT=File
+O=File                        The BAM or SAM output file.   Required.
+ 
+ @more_info@
+
+  </help>
+</tool>
