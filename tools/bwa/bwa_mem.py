@@ -152,7 +152,7 @@ def __main__():
     if options.interPairEnd:
         start_cmds += ' -p'
     if options.params != 'pre_set':
-         if options.minSeedLength is not None:
+        if options.minSeedLength is not None:
 	    start_cmds += " -k %d" % options.minSeedLength
 	if options.bandWidth is not None:
 	    start_cmds += " -w %d" % options.bandWidth
