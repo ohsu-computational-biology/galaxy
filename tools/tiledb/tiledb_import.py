@@ -5,6 +5,7 @@ import subprocess
 import tempfile
 import argparse
 import shutil
+import vcf
 
 def cleanup_files(*files):
     for file in files:
@@ -65,6 +66,7 @@ except subprocess.CalledProcessError:
     cleanup_files(sqlite_filename, csv_filename);
     raise
 
+num_samples = 0;
 for vcf_file in args.vcf_files:
     try:
         subprocess.check_call(bcftools+' view -O t --sqlite='+sqlite_filename+' '+vcf_file+' >> '+csv_filename, shell=True);
@@ -72,8 +74,10 @@ for vcf_file in args.vcf_files:
         sys.stderr.write('Unexpected error while importing VCF/BCF file '+vcf_file+' : '+str(sys.exc_info()[0]));
         cleanup_files(sqlite_filename, csv_filename);
         raise
+    vcf_reader = vcf.Reader(open(vcf_file, 'rb'));
+    first_record = vcf_reader.next();
+    num_samples += 0 if(first_record.samples == None) else len(first_record.samples);
 
-num_samples = len(args.vcf_files);
 workspace = tempfile.mkdtemp(dir=cwd);
 tmpdir = workspace+'/tmp';
 os.mkdir(tmpdir);
@@ -85,7 +89,7 @@ except subprocess.CalledProcessError:
     shutil.rmtree(workspace);
     raise
 
-info_string=('INFO: imported variants from %d VCF/BCF file(s) into TileDB instance '+args.tiledb_name)%(num_samples);
+info_string=('INFO: imported variants from %d VCF/BCF file(s) with %d sample(s) into TileDB instance '+args.tiledb_name)%(len(args.vcf_files), num_samples);
 print(info_string);
 
 if(args.info_file):
