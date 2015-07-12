@@ -247,7 +247,9 @@
     <label id="GATK" text="GATK version 3.2"/>
 	    <tool file="gatk/realigner_target_creator.xml" />
 	    <tool file="gatk/indel_realigner.xml" />
+	    <tool file="gatk/indel_realigner_sg.xml" />
 	    <tool file="gatk/base_recalibrator.xml" />
+	    <tool file="gatk/base_recalibrator_sg.xml" />
 	    <tool file="gatk/print_reads.xml" />
 	    <tool file="gatk/haplotype_caller.xml"/>
 	    <tool file="gatk/unified_genotyper.xml"/>

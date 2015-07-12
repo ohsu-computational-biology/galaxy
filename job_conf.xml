@@ -23,7 +23,7 @@
 	[server:id] in universe_wsgi.ini.
 	-->
     </handlers>
-    <destinations default="docker_condor_16C_16G">
+    <destinations default="condor_16C_16G">
 	<!-- Destinations define details about remote resources and how jobs
 	should be executed on those remote resources.
         -->
