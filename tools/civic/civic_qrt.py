@@ -123,6 +123,7 @@ def read(input_file,output_file, host,entrez_id_column):
                 gene_name = civic_gene_name['name']
             else:
               civic_variant = {}
+              gene_name = ''
             render(line,gene_name,civic_variant,host,entrez_id_column,expected_hgvs)
       print('</tbody>\n</table>\n</body>\n<p/></html>')
       print("\n<p><center><h4><font color='#01550C'><b>Hit Rate with CIViC: {}%</b></font></h4></center></p>".format((hit_count/line_count)*100))
