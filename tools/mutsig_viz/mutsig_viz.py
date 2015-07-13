@@ -15,8 +15,8 @@ def mutsig_viz(sig_genes, output, n_genes, q_val):
 		d = pd.read_csv(sig_genes, sep = '\t')
 		d['total'] = d['n_nonsilent'] + d['n_silent'] + d['n_noncoding']
 		# sort and remove genes with < 0.1 FDR
-		q = 'q<='+str(q_val)
-		fd = d.sort('q').query(q)
+		_q = 'q<='+str(q_val)
+		fd = d.sort('q').query(_q)
 
 		# plot silent / nonsilent mutations / noncoding mutations
 		if n_genes is None or int(n_genes) > 125:
@@ -32,7 +32,7 @@ def mutsig_viz(sig_genes, output, n_genes, q_val):
 		ax = nsm.plot(x='gene', y = ['n_nonsilent', 'n_silent', 'n_noncoding'], kind='barh', stacked=True)
 		ax.set_xlabel('Mutation Count', fontsize=8)
 		ax.set_ylabel('Gene', fontsize=8)
-		ax.set_title('Top '+ str(n_genes) +' Significant Genes ('+q+')', fontsize=4)
+		ax.set_title('Top '+ str(n_genes) +' Significant Genes ('+_q+')', fontsize=4)
 
 		l = plt.legend(loc="best")
 		l.get_texts()[0].set_text('Nonsilent')
