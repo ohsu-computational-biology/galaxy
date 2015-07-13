@@ -20,6 +20,7 @@ export CP_PATH=$CCC_SYNC_DIR/tools/cellprofiler/cp_pipeline
 export LABKEY_USERNAME=ccc@ccc.com
 export LABKEY_PASSWORD=Intel123
 export OMERO_IMAGE_SELECTION=$CCC_SYNC_DIR/tools/omero
+export HISTOGRAM_VISUALIZATION=$CCC_SYNC_DIR/tools/histogram
 #END FIXME
 export SEATTLESEQ_GETANNOTATION_JAR_PATH=$GENOMICS_DIR/annotation/getAnnotation/project/
 export SEATTLESEQ_WRITEGENOTYPE_JAR_PATH=$GENOMICS_DIR/annotation/writeGenotype/project/
@@ -37,6 +38,8 @@ export PATH=$PINDEL_PATH:$BREAKDANCER_PATH:$TOPHAT_EXE_PATH:$CUFFLINKS_TOOLS_EXE
 export NSLOTS=16
 export GALAXY_SLOTS=16
 export PYTHON_EGG_CACHE=.eggs_cache
+export CCC_DRMAA_PYTHON_MODULE_DIRECTORY=/cluster_share/Galaxy/drmaa/
+export PYTHONPATH=${CCC_DRMAA_PYTHON_MODULE_DIRECTORY}:$PYTHONPATH
 export BIOBLEND_REPO_DIR=$CCC_SYNC_DIR/tools/galaxy/bioblend
 export FASTQC_PERL_SCRIPT=$GENOMICS_DIR/ohsu/dnapipeline/FastQC/fastqc
 export BCFTOOLS=$CCC_SYNC_DIR/tools/bcftools/bcftools

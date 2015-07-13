@@ -1,0 +1,35 @@
+<tool id="hpt" name="Application">
+  <description></description>
+  <command interpreter="python">/opt/HarmonyPoint/Galaxy/galaxy-dist/tools/HP_Tools/submitter/submitter.py $input1 $input2 $output</command>
+  <inputs>
+    <param name="input1" type="select" label="Select Application">
+       <option value="ohsu">ohsu</option>
+    </param>
+    <param name="input3" type="select" label="Select Cancer Type">
+       <option value="liver">liver</option>
+       <option value="blood">blood</option>
+       <option value="skin">skin</option>
+       <option value="kidney">kidney</option>
+    </param>
+    <param name="input4" type="text" area="True" label="Gateway URL's">
+      <sanitizer>
+        <valid initial="string.printable">
+        </valid>
+      </sanitizer>
+    </param>
+    <param name="input2" type="text" area="True" label="Arguments for the Application">
+      <sanitizer>
+        <valid initial="string.printable">
+        </valid>
+      </sanitizer>
+    </param>
+  </inputs>
+ <outputs>
+    <data format="text" name="output" />
+  </outputs>
+
+  <help>
+  </help>
+
+</tool>
+

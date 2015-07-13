@@ -24,6 +24,8 @@
     <tool file="genomespace/genomespace_file_browser_prod.xml" />
     <tool file="genomespace/genomespace_importer.xml" />
     <tool file="validation/fix_errors.xml" />
+    <tool file="data_source/ccc_fetch.xml" />
+    <tool file="data_source/fetch_to_single_node.xml" />
   </section>
   <section id="send" name="Send Data">
     <tool file="genomespace/genomespace_exporter.xml" />
@@ -35,6 +37,7 @@
     <tool file="filters/fixedValueColumn.xml" />
     <!--<tool file="stats/column_maker.xml" />-->
     <tool file="filters/catWrapper.xml" />
+    <tool file="filters/catCentralWrapper.xml" />
     <tool file="filters/cutWrapper.xml" />
     <tool file="filters/mergeCols.xml" />
     <tool file="filters/convert_characters.xml" />
@@ -110,6 +113,9 @@
   </section>
   <section id="retrieveThumbnails" name="OMERO Visualization Tool">
     <tool file="omero/retrieveThumbnails.xml" />
+  </section>
+  <section id="histogram" name="Image Analysis Histogram">
+    <tool file="histogram/histogram.xml" />
   </section>
   <section id="scores" name="Get Genomic Scores">
     <tool file="filters/wiggle_to_simple.xml" />
@@ -236,6 +242,11 @@
   <section id="testing_tools" name="Testing tools">
     <tool file="sum/product_map.xml"/>
     <tool file="sum/sum_reduce.xml"/>
+    <tool file="sum/hacked_samtools_flagstat.xml"/>
+    <tool file="sum/hacked_sam_to_bam.xml" />
+    <tool file="sum/summer.xml" />
+    <tool file="sum/local_summer.xml" />
+    <tool file="sum/test_from_wd.xml" />
   </section>
   <section id="DNA_sequencing" name="DNA sequencing tools">
     <label id="BWA" text="BWA-MEM 0.7.12" />
@@ -301,6 +312,9 @@
   </section>
   <section id="variant_db_tools" name="Variant DB tools">
     <tool file="variant_db/variant_db_client.xml"/>
+  </section>  
+  <section id="HPt_tools" name="Harmony Point Tools">
+    <tool file="HP_Tools/hpt.xml"/>
   </section>
   <section id="custom_tools" name="Custom tools">
   </section>
