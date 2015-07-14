@@ -36,7 +36,7 @@ def login(host=None):
     while response is None or response.status_code != 200:
 
         try:
-            response = session.get("{0}/webclient/login".format(host), params=omero_login_payload)
+            response = session.get("{0}/webclient/login".format(host), params=omero_login_payload, verify=False)
 
         except requests.exceptions.ConnectionError:
             print("Connection Error with OMERO Server: {0}".format(host))
@@ -55,7 +55,7 @@ def login(host=None):
 
 def download_thumbnail(image_id, prefix=None, host=None, session=None, files_path=None):
 
-      response = session.get("{0}webgateway/render_thumbnail/{1}/".format(host, image_id))
+      response = session.get("{0}/webgateway/render_thumbnail/{1}/".format(host, image_id), verify=False)
 
       image = Image.open(StringIO(response.content))
 
