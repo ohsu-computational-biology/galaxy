@@ -1,0 +1,48 @@
+html{
+	background-color: #ffffff;
+}
+
+body{
+	font:14px/1.5 Arial, Helvetica, sans-serif;
+	padding:0;
+	margin:0;
+}
+
+.header-login-signup{
+	background-color:#ffffff;
+	padding: 20px 20px;
+	height: 60px;
+}
+
+.header-login-signup .header-limiter {
+	float: left;
+	max-width: 1200px;
+	text-align: center;
+	margin-bottom: 5px;
+	margin-top: -20px;
+}
+
+/* Project Identity Mark */
+
+.header-login-signup .header-limiter h1{
+	float: left;
+	clear: both;
+	font: normal 28px Arial, Helvetica, sans-serif;
+	line-height: 0px;
+	margin: 0;
+}
+
+/* Project title*/
+.project{
+	float: left;
+	margin-top: -25px;
+	margin-left: -20px;
+	font: bold 9px Arial, Helvetica, sans-serif;
+	color: #ffffff;
+	line-height: 10px; 
+	background: #2e77b7;
+	padding: 5px 20px;
+	height: 34px;
+	width: 100%;
+}
+
