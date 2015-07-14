@@ -1,7 +1,9 @@
 <tool id="labkey_image_update" name="Update" version="4.1">
   <description>Update LabKey Server with results</description>
 
-  <command>java -jar $__tool_directory__/labkeyUpdate.jar 
+  <command>export http_proxy=;
+  	   export https_proxy=;
+  	   java -jar $__tool_directory__/labkeyUpdate.jar 
   	   --hostname	$hostname
   	   --table	$table
   	   --input	$data
