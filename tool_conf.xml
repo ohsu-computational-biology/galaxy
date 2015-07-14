@@ -146,6 +146,7 @@
     <tool file="maf/vcf_to_maf_customtrack.xml" />
     <!--<tool file="mutation/visualize.xml" />-->
     <tool file="mutsig_viz/mutsig_viz.xml" />
+    <tool file="hpt_visualizer/hpt_visualizer.xml" />
   </section>
   <section id="multVar" name="Multivariate Analysis">
     <!--<tool file="multivariate_stats/pca.xml" />-->

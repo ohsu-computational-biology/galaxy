@@ -1,0 +1,18 @@
+<tool id="hpt_viz" name="Harmony Point Workflow Output Visualizer" version="">
+  <description>Visualize Output of Harmony Point Workflow</description>
+  <command> 
+    mkdir -p ${output.files_path};
+    cp $input ${output.files_path}/image.png;
+    python $__tool_directory__/hpt_visualizer.py
+    -i $input
+    -o $output
+  </command>
+  <inputs>
+    <param format="png" name="input" type="data" label="Mutsig Significant Genes File: " help="View Image: " />
+  </inputs>
+
+  <outputs>
+    <data format="html" name="output" label="hpt_visualizer.html"/>
+  </outputs>
+
+</tool>
