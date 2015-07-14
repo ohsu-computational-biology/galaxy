@@ -24,7 +24,6 @@
         <columnMapping columnName="donor_gender" fieldKey="specimen_id/donor_gender"/>
         <columnMapping columnName="fastq_forward_ccc_did" fieldKey="fastq_forward"/>
         <columnMapping columnName="fastq_reverse_ccc_did" fieldKey="fastq_reverse"/>
-        <columnMapping columnName="fastqc_ccc_did" fieldKey="fastqc_rawdata"/>
       </columnMappings>
     </labkeyInstance>
     <labkeyInstance>
@@ -41,7 +40,6 @@
         <columnMapping columnName="donor_gender" fieldKey="specimen_id/donor_gender"/>
         <columnMapping columnName="fastq_forward_ccc_did" fieldKey="fastq_forward"/>
         <columnMapping columnName="fastq_reverse_ccc_did" fieldKey="fastq_reverse"/>
-        <columnMapping columnName="fastqc_ccc_did" fieldKey="fastqc_rawdata"/>
       </columnMappings>
     </labkeyInstance>
   </labkeyInstances>
