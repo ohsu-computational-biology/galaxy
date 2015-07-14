@@ -16,6 +16,7 @@ import shutil
 import subprocess
 import sys
 import traceback
+import json as library_json
 from galaxy import model, util
 from galaxy.datatypes import metadata
 from galaxy.exceptions import ObjectInvalid, ObjectNotFound
@@ -1143,18 +1144,38 @@ class JobWrapper( object ):
                         job.set_state( final_job_state )
                         return self.fail( "Job %s's output dataset(s) could not be read" % job.id )
             #Karthik: for "remote" datasets created on the central site, create symlinks to real file
-            path_on_central_site = None;
-            if is_remote_dataset_flag and not self.__link_file_check():
-                dataset_path = self.get_output_fnames()[dataset_assoc_loop_idx];
-                uuid_string = str(dataset_assoc.dataset.dataset.uuid);
+            def hacky_get_path_on_central_site_if_exists(uuid_string):
                 CCC_results_dir = self.app.config.CCC_results_dir;
                 #FIXME: Should get path from DTS and not hard code
                 results_path = os.path.join(CCC_results_dir, uuid_string+'.o');
                 fetch_path = os.path.join(self.working_directory, uuid_string+'.o');
                 if(os.path.exists(results_path)):
-                    path_on_central_site = results_path;
+                    return results_path;
                 elif(os.path.exists(fetch_path)):
-                    path_on_central_site = fetch_path;
+                    return fetch_path;
+                return None;
+            def get_path_on_central_site_if_exists_from_dts(dataset_uuid):
+                cmd='unset http_proxy;curl http://127.0.0.1:8900/api/v1/dts/file/'+dataset_uuid;
+                pd = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE);
+                stdout_string = pd.communicate()[0];
+                if(stdout_string != "" and stdout_string != "null"):
+                    dsinfo_dict = library_json.loads(stdout_string);
+                    if 'locations' in dsinfo_dict:
+                        if 'value' in dsinfo_dict['locations']:
+                            list_locations = library_json.loads(dsinfo_dict['locations']['value']);
+                            for site_location in list_locations:
+                                #print(site_location);
+                                if('name' in site_location and 'path' in site_location):
+                                    full_path = site_location['path'] + os.path.sep + site_location['name'];
+                                    if(os.path.exists(full_path)):
+                                        return full_path;
+                return None;
+            #Karthik: for "remote" datasets created on the central site, create symlinks to real file
+            path_on_central_site = None;
+            if is_remote_dataset_flag and not self.__link_file_check():
+                dataset_path = self.get_output_fnames()[dataset_assoc_loop_idx];
+                uuid_string = str(dataset_assoc.dataset.dataset.uuid);
+                path_on_central_site = get_path_on_central_site_if_exists_from_dts(uuid_string);
                 if(path_on_central_site and os.stat(path_on_central_site).st_size > 0):
                     if(os.path.exists(dataset_path.real_path)):
                         os.remove(dataset_path.real_path);
