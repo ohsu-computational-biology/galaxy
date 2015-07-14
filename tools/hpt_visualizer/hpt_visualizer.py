@@ -6,12 +6,16 @@ def write_html(output):
 			<!DOCTYPE html>
 			<html>
 			<head>
+			    <style type="text/css">
+					body{
+						font:14px/1.5 Arial, Helvetica, sans-serif;
+					}
+			    </style>
 			</head>
-			<body style="font:14px/1.5 Arial, Helvetica, sans-serif;">
-			    <h1><center>Harmony Point</center></h1>
-			  	<h2 id="title"><center><small><i>Secure Compute Results</i></small></center></h2>
-			  	<h4><center>Significant Genes Identified by 1185 Breast Cancer Samples</center></h4>
-				<center><img src="image.png"/></center>
+			<body>
+				<h1><center>Harmony Point</br><small><i>Secure Compute Results</i></small></center></h1>
+			  	<h4><center>1185 Breast Cancer Samples</center></h4>
+			<center><img src="image.png"/></center>
 			</body>
 			</html>
 	"""

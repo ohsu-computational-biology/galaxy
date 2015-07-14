@@ -54,6 +54,9 @@
 	<tool id="sum_reduce" destination="condor_2C_2G"/>
 	<tool id="getAnnotation" destination="condor_2C_2G"/>
 	<tool id="upload1" destination="condor_1C_100M"/>
+        <tool id="mutsig_viz" destination="condor_1C_100M"/>
+        <tool id="hpt_viz" destination="condor_1C_100M"/>
+        <tool id="multi_rnaseq" destination="condor_1C_100M"/>
     </tools>
     <limits>
 	<!-- Certain limits can be defined. -->
