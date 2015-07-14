@@ -13,7 +13,7 @@
   </inputs>
 
   <outputs>
-    <data format="pdf" name="output" label="sig_genes.pdf"/>
+    <data format="png" name="output" label="sig_genes.png"/>
   </outputs>
 
 </tool>
