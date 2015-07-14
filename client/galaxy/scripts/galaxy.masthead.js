@@ -122,20 +122,25 @@ var GalaxyMasthead = Backbone.View.extend({
     // fill template
     _template: function(options) {
         var brand_text = options.brand ? ("/ " + options.brand) : "" ;
-        return  '<div><div id="masthead" class="navbar navbar-fixed-top navbar-inverse">' +
-                    '<div style="position: relative; right: -50%; float: left;">' +
-                        '<div id="navbar" style="display: block; position: relative; right: 50%;"></div>' +
-                    '</div>' +
-                   '<div class="navbar-brand">' +
-                        '<a href="' + options.logo_url + '">' +
-                            '<img border="0" src="' + galaxy_config.root + 'static/images/galaxyIcon_noText.png">' +
-                            '<span id="brand"> Galaxy ' + brand_text + '</span>' +
-                        '</a>' +
-                    '</div>' +
+        return  '<div>' +
+                  '<div id="masthead" class="navbar navbar-fixed-top navbar-inverse">' +
+                  '<div class="">' +
+                    '<img src="' + galaxy_config.root + 'static/images/ccc-projectidentitymark.png" class="project-identity-mark">' + 
                     '<div class="quota-meter-container"></div>' +
                     '<div id="iconbar" class="iconbar"></div>' +
-                '</div>' +
-                '<div id="masthead-background" style="display: none; position: absolute; top: 33px; width: 100%; height: 100%; z-index: 1010"></div>' +
+                  '</div>' +
+                  '<div class="project">' +
+                       '<div class="navbar-brand">' +
+                            '<a href="' + options.logo_url + '">' +
+                                '<span id="brand"><h1>Galaxy</h1></span>' +
+                            '</a>' +
+                        '</div>' +
+                      '<div id="navbar-container">' +
+                          '<div id="navbar" style="display: block; position: relative; right: 50%;"></div>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>' +
+                  '<div id="masthead-background" style="display: none; position: absolute; top: 33px; width: 100%; height: 100%; z-index: 1010"></div>' +
                 '</div>';
     }
 });

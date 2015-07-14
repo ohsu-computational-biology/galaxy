@@ -1,0 +1,46 @@
+.navbar {
+  background-color: @gray-light;
+}
+
+.navbar-brand {
+  position:        relative !important;
+  margin-left:     @left-header-margin !important;
+  margin-right:    -@project-name-width - @left-header-margin;
+  padding-bottom:  ((@bottom-header-height - @line-height-computed) / 2);
+  padding-left:    0px !important;
+  padding-right:   0px !important;
+  padding-top:     ((@bottom-header-height - @line-height-computed) / 2);
+  width:           @project-name-width;
+}
+
+#navbar-container {
+  position:  relative;
+  right:     -50%;
+  float:     left;
+}
+
+/* For links in the navbar, increase the font-size. */
+.dropdown-toggle {
+  font-size:  14px;
+}
+
+.navbar-nav {
+  @media (max-width: @screen-xs-max) {
+    // Dropdowns get custom display when collapsed
+    .open .dropdown-menu {
+      > li > a {
+        line-height: @line-height-computed;
+      }
+    }
+  }
+
+  // Uncollapse the nav
+  @media (min-width: @grid-float-breakpoint) {
+    > li {
+      > a {
+        padding-top: ((@bottom-header-height - @line-height-computed) / 2);
+        padding-bottom: ((@bottom-header-height - @line-height-computed) / 2);
+      }
+    }
+  }
+}
