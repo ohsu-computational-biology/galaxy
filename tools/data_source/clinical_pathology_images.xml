@@ -5,7 +5,10 @@
         can be queried, provided by OHSU
 	</description>
 	
-	<command>java -jar $__tool_directory__/labkeyMultiSiteQuery.jar 
+	<command>
+		export http_proxy=;
+		export https_proxy=;
+		java -jar $__tool_directory__/labkeyMultiSiteQuery.jar 
 		--username \$LABKEY_USERNAME 
 		--password \$LABKEY_PASSWORD 
 		--xml $__tool_directory__/clinical_pathology_images_conf.xml

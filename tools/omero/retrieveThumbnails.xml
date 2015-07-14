@@ -1,6 +1,8 @@
 <tool id="retrieveThumbnails" name="OMERO Visualization Tool" version="1.0.0">
     <description>Retrieve Thumbnails from OMERO for Visualization</description>
     <command>
+      export http_proxy=;
+      export https_proxy=;
       #set $history_id=$__app__.security.encode_id($html_file.creating_job.history.id)
       mkdir -p ${html_file.files_path}/data/images;
       cp \$OMERO_IMAGE_SELECTION/static/tools/omero-image-selection/index.html ${html_file};
