@@ -567,15 +567,15 @@ textarea.input-group-sm>.form-control,textarea.input-group-sm>.input-group-addon
 .navbar-default{background-color:#eee;border-color:#888}.navbar-default .navbar-brand{color:#777}.navbar-default .navbar-brand:hover,.navbar-default .navbar-brand:focus{color:#5e5e5e;background-color:transparent}
 .navbar-default .navbar-text{color:#777}
 .navbar-default .navbar-nav>li>a{color:#777}.navbar-default .navbar-nav>li>a:hover,.navbar-default .navbar-nav>li>a:focus{color:#333;background-color:transparent}
-.navbar-default .navbar-nav>.active>a,.navbar-default .navbar-nav>.active>a:hover,.navbar-default .navbar-nav>.active>a:focus{color:#555;background-color:#dedede}
+.navbar-default .navbar-nav>.active>a,.navbar-default .navbar-nav>.active>a:hover,.navbar-default .navbar-nav>.active>a:focus{color:#555;background-color:#eee}
 .navbar-default .navbar-nav>.disabled>a,.navbar-default .navbar-nav>.disabled>a:hover,.navbar-default .navbar-nav>.disabled>a:focus{color:#ccc;background-color:transparent}
 .navbar-default .navbar-toggle{border-color:#ddd}.navbar-default .navbar-toggle:hover,.navbar-default .navbar-toggle:focus{background-color:#ddd}
 .navbar-default .navbar-toggle .icon-bar{background-color:#ccc}
 .navbar-default .navbar-collapse,.navbar-default .navbar-form{border-color:#ddd}
 .navbar-default .navbar-nav>.dropdown>a:hover .caret,.navbar-default .navbar-nav>.dropdown>a:focus .caret{border-top-color:#333;border-bottom-color:#333}
-.navbar-default .navbar-nav>.open>a,.navbar-default .navbar-nav>.open>a:hover,.navbar-default .navbar-nav>.open>a:focus{background-color:#dedede;color:#555}.navbar-default .navbar-nav>.open>a .caret,.navbar-default .navbar-nav>.open>a:hover .caret,.navbar-default .navbar-nav>.open>a:focus .caret{border-top-color:#555;border-bottom-color:#555}
+.navbar-default .navbar-nav>.open>a,.navbar-default .navbar-nav>.open>a:hover,.navbar-default .navbar-nav>.open>a:focus{background-color:#eee;color:#555}.navbar-default .navbar-nav>.open>a .caret,.navbar-default .navbar-nav>.open>a:hover .caret,.navbar-default .navbar-nav>.open>a:focus .caret{border-top-color:#555;border-bottom-color:#555}
 .navbar-default .navbar-nav>.dropdown>a .caret{border-top-color:#777;border-bottom-color:#777}
-@media (max-width:767px){.navbar-default .navbar-nav .open .dropdown-menu>li>a{color:#777}.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,.navbar-default .navbar-nav .open .dropdown-menu>li>a:focus{color:#333;background-color:transparent} .navbar-default .navbar-nav .open .dropdown-menu>.active>a,.navbar-default .navbar-nav .open .dropdown-menu>.active>a:hover,.navbar-default .navbar-nav .open .dropdown-menu>.active>a:focus{color:#555;background-color:#dedede} .navbar-default .navbar-nav .open .dropdown-menu>.disabled>a,.navbar-default .navbar-nav .open .dropdown-menu>.disabled>a:hover,.navbar-default .navbar-nav .open .dropdown-menu>.disabled>a:focus{color:#ccc;background-color:transparent}}
+@media (max-width:767px){.navbar-default .navbar-nav .open .dropdown-menu>li>a{color:#777}.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,.navbar-default .navbar-nav .open .dropdown-menu>li>a:focus{color:#333;background-color:transparent} .navbar-default .navbar-nav .open .dropdown-menu>.active>a,.navbar-default .navbar-nav .open .dropdown-menu>.active>a:hover,.navbar-default .navbar-nav .open .dropdown-menu>.active>a:focus{color:#555;background-color:#eee} .navbar-default .navbar-nav .open .dropdown-menu>.disabled>a,.navbar-default .navbar-nav .open .dropdown-menu>.disabled>a:hover,.navbar-default .navbar-nav .open .dropdown-menu>.disabled>a:focus{color:#ccc;background-color:transparent}}
 .navbar-default .navbar-link{color:#777}.navbar-default .navbar-link:hover{color:#333}
 .navbar-inverse{background-color:#2c3143;border-color:#181a24}.navbar-inverse .navbar-brand{color:#e5e5e5}.navbar-inverse .navbar-brand:hover,.navbar-inverse .navbar-brand:focus{color:#fff;background-color:transparent}
 .navbar-inverse .navbar-text{color:#e5e5e5}
@@ -765,6 +765,7 @@ label{font-weight:normal}
 body h2{font-size:18px;color:#404040}
 body h3{font-size:14px;color:#a6a6a6}
 body p{font-size:12px;color:#404040}
+.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus{font-weight:bold}
 .footer{background-color:#e5e5e5}.footer>a:link{color:#0071c5}
 .footer>a:visited{color:#a6a6a6}
 .footer>a:hover{text-decoration:underline}
@@ -775,6 +776,7 @@ a:hover{text-decoration:underline}
 a:active{color:#0071c5}
 .navbar{background-color:#e5e5e5}
 .navbar-brand{position:relative !important;margin-left:15px !important;margin-right:-165px;padding-bottom:8.5px;padding-left:0px !important;padding-right:0px !important;padding-top:8.5px;width:150px}
+#masthead .iconbar{color:#404040 !important}
 #navbar-container{position:relative;right:-50%;float:left}
 .dropdown-toggle{font-size:14px}
 @media (max-width:767px){.navbar-nav .open .dropdown-menu>li>a{line-height:17px}}@media (min-width:0){.navbar-nav>li>a{padding-top:8.5px;padding-bottom:8.5px}}
