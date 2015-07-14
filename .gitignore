@@ -8,6 +8,7 @@ scripts/scramble/archives
 
 # Python virtualenv
 .venv
+.ccc
 
 # Database stuff
 database/beaker_sessions
@@ -21,6 +22,8 @@ database/tmp
 database/*.sqlite
 database/openid_consumer_cache
 database/dataset_library_import
+database/*
+database/HPt
 
 # Python bytecode
 *.pyc
@@ -131,3 +134,6 @@ database/disk_object
 api_test
 #The following file is now a symbolic link only
 scripts/external_chown_script.py
+
+# Deployed tools
+static/tools/omero-image-selection

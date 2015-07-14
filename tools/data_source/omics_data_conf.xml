@@ -1,0 +1,46 @@
+<dataSource xmlns="http://edu.ohsu.ccc/dataSource/xml">
+  <columns>
+    <column>project_name</column>
+    <column>donor_id</column>
+    <column>specimen_classification</column>
+    <column>specimen_type</column>
+    <column>donor_gender</column>
+    <column>fastq_forward_ccc_did</column>
+    <column>fastq_reverse_ccc_did</column>
+    <column>fastqc_ccc_did</column>
+  </columns>
+  <labkeyInstances>
+    <labkeyInstance>
+      <name>Austin</name>
+      <baseUrl>https://austin-gateway.ccc.org:9090/labkey</baseUrl>
+      <containerPath>ccc</containerPath>
+      <schemaName>lists</schemaName>
+      <queryName>genome_data</queryName>
+      <columnMappings>
+        <columnMapping columnName="project_name" fieldKey="specimen_id/project_code"/>
+        <columnMapping columnName="donor_id" fieldKey="specimen_id/donor_id"/>
+        <columnMapping columnName="specimen_classification" fieldKey="specimen_id/disease_state"/>
+        <columnMapping columnName="specimen_type" fieldKey="specimen_id/disease_type"/>
+        <columnMapping columnName="donor_gender" fieldKey="specimen_id/donor_gender"/>
+        <columnMapping columnName="fastq_forward_ccc_did" fieldKey="fastq_forward"/>
+        <columnMapping columnName="fastq_reverse_ccc_did" fieldKey="fastq_reverse"/>
+      </columnMappings>
+    </labkeyInstance>
+    <labkeyInstance>
+      <name>Portland</name>
+      <baseUrl>https://pdx-gateway.ccc.org:9090/labkey</baseUrl>
+      <containerPath>ccc</containerPath>
+      <schemaName>lists</schemaName>
+      <queryName>genome_data</queryName>
+      <columnMappings>
+        <columnMapping columnName="project_name" fieldKey="specimen_id/project_code"/>
+        <columnMapping columnName="donor_id" fieldKey="specimen_id/donor_id"/>
+        <columnMapping columnName="specimen_classification" fieldKey="specimen_id/disease_state"/>
+        <columnMapping columnName="specimen_type" fieldKey="specimen_id/disease_type"/>
+        <columnMapping columnName="donor_gender" fieldKey="specimen_id/donor_gender"/>
+        <columnMapping columnName="fastq_forward_ccc_did" fieldKey="fastq_forward"/>
+        <columnMapping columnName="fastq_reverse_ccc_did" fieldKey="fastq_reverse"/>
+      </columnMappings>
+    </labkeyInstance>
+  </labkeyInstances>
+</dataSource>

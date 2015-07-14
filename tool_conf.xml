@@ -1,9 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <toolbox>
-  <section id="getext" name="Get CCC Data"> 
+  <section id="getextccc" name="Get CCC Data"> 
     <tool file="data_source/clinical_pathology_images.xml" />    
-    <tool file="data_source/genomes.xml" /> 
-	<tool file="data_source/rnaseq.xml" />    
+    <tool file="data_source/omics_data.xml" />
   </section>
   <section id="getext" name="Get Data">
     <tool file="data_source/upload.xml" />
@@ -25,6 +24,8 @@
     <tool file="genomespace/genomespace_file_browser_prod.xml" />
     <tool file="genomespace/genomespace_importer.xml" />
     <tool file="validation/fix_errors.xml" />
+    <tool file="data_source/ccc_fetch.xml" />
+    <tool file="data_source/fetch_to_single_node.xml" />
   </section>
   <section id="send" name="Send Data">
     <tool file="genomespace/genomespace_exporter.xml" />
@@ -36,6 +37,7 @@
     <tool file="filters/fixedValueColumn.xml" />
     <!--<tool file="stats/column_maker.xml" />-->
     <tool file="filters/catWrapper.xml" />
+    <tool file="filters/catCentralWrapper.xml" />
     <tool file="filters/cutWrapper.xml" />
     <tool file="filters/mergeCols.xml" />
     <tool file="filters/convert_characters.xml" />
@@ -109,6 +111,12 @@
   <section id="cellprofiler" name="CellProfiler">
     <tool file="cellprofiler/cellprofiler.xml" />
   </section>
+  <section id="retrieveThumbnails" name="OMERO Visualization Tool">
+    <tool file="omero/retrieveThumbnails.xml" />
+  </section>
+  <section id="histogram" name="Image Analysis Histogram">
+    <tool file="histogram/histogram.xml" />
+  </section>
   <section id="scores" name="Get Genomic Scores">
     <tool file="filters/wiggle_to_simple.xml" />
     <tool file="stats/aggregate_binned_scores_in_intervals.xml" />
@@ -130,6 +138,7 @@
   </section>
   <section id="labkey" name="LabKey">
     <tool file="labkey/labkey_store.xml" />
+    <tool file="labkey/labkey_image_update.xml" />
   </section>  
   <section id="plots" name="Graph/Display Data">
     <!--<tool file="plotting/histogram2.xml" />-->
@@ -234,9 +243,14 @@
   <section id="testing_tools" name="Testing tools">
     <tool file="sum/product_map.xml"/>
     <tool file="sum/sum_reduce.xml"/>
+    <tool file="sum/hacked_samtools_flagstat.xml"/>
+    <tool file="sum/hacked_sam_to_bam.xml" />
+    <tool file="sum/summer.xml" />
+    <tool file="sum/local_summer.xml" />
+    <tool file="sum/test_from_wd.xml" />
   </section>
   <section id="DNA_sequencing" name="DNA sequencing tools">
-    <label id="BWA" text="BWA-MEM 0.7.9a" />
+    <label id="BWA" text="BWA-MEM 0.7.12" />
 	    <tool file="bwa/bwa_mem.xml" />
     <label id="Samtools" text="Samtools version 0.1.19"/>
 	    <tool file="sam_to_bam/sam_to_bam.xml" />
@@ -251,16 +265,26 @@
 	    <tool file="gatk/unified_genotyper.xml"/>
 	    <tool file="gatk/depth_of_coverage.xml"/>
 	    <tool file="gatk/variant_filtration.xml"/>
-    <label id="Picard" text="Picard version 1.110"/>
-	    <tool file="picard/rgPicardMarkDups.xml" />
+	    <tool file="gatk/variant_select.xml" />
+   <label id="Picard" text="Picard version 1.135"/>
+	    <tool file="picard/picard_MarkDuplicates.xml" />
 	    <tool file="picard/picard_SamToFastq.xml" />
-	    <tool file="picard/rgPicardSamFormatConverter.xml" />
-	    <tool file="picard/rgPicardSortSam.xml" />
+	    <tool file="picard/picard_SamFormatConverter.xml" />
+	    <tool file="picard/picard_SortSam.xml" />
+	    <tool file="picard/picard_MergeSamFiles.xml" />
     <label id="BICSeq" text="BICSeq" />
 	    <tool file="Suzi_pipeline/Bic-Seq_samtools.xml" />
 	    <tool file="Suzi_pipeline/Bic-Seq.xml" /> 
-    <label id="mutect" text="MuTect version 1.1.7" />
+    <label id="Mutect" text="MuTect version 1.1.7" />
 	    <tool file="mutect/muTect.xml" />
+    <label id="Breakdancer" text="Breakdancer version 1.4.5" />
+            <tool file="breakdancer/breakdancer.xml" />
+    <label id="Pindel" text="Pindel 0.2.5a8" />
+            <tool file="pindel/pindel.xml" />
+    <label id="VcfSorter" text="VCF Sorter" />
+            <tool file="vcf_sorter/vcfsorter.xml" />
+    <label id="TileDB" text="TileDB tools"/>
+            <tool file="tiledb/tiledb_import.xml"/>
   </section>  
   <section id="RNA_sequencing" name="RNA sequencing tools">
      <label id="tophat2" text="Tophat2 version 2.0.14" />
@@ -291,6 +315,9 @@
   </section>
   <section id="variant_db_tools" name="Variant DB tools">
     <tool file="variant_db/variant_db_client.xml"/>
+  </section>  
+  <section id="HPt_tools" name="Harmony Point Tools">
+    <tool file="HP_Tools/hpt.xml"/>
   </section>
   <section id="custom_tools" name="Custom tools">
   </section>

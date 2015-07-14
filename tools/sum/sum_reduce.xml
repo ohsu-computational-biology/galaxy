@@ -2,7 +2,7 @@
   <description>Sum reduction</description>
   <command interpreter="python">sum_reduce.py $vector $sum_vector</command>
   <inputs>
-    <param name="vector" type="data" label="vector"/>
+    <param name="vector" type="data" format="txt" label="vector"/>
   </inputs>
   <outputs>
     <data name="sum_vector" label="sum_vector" format="input"/>

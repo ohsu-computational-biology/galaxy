@@ -196,7 +196,9 @@ class BaseJobRunner( object ):
             job_wrapper,
             include_metadata=include_metadata,
             include_work_dir_outputs=include_work_dir_outputs,
-            container=container
+	    create_output_dataset_json=self.app.config.use_remote_datasets,
+            container=container,
+            extra_docker_volumes=self.app.config.extra_docker_volumes
         )
 
     def get_work_dir_outputs( self, job_wrapper, job_working_directory=None ):
@@ -212,10 +214,10 @@ class BaseJobRunner( object ):
         output_paths = {}
         for dataset_path in job_wrapper.get_output_fnames():
             path = dataset_path.real_path
-            if self.app.config.outputs_to_working_directory:
+            if self.app.config.outputs_to_working_directory or self.app.config.use_uuids_for_dataset_reference():
                 path = dataset_path.false_path
             output_paths[ dataset_path.dataset_id ] = path
-
+        
         output_pairs = []
         # Walk job's output associations to find and use from_work_dir attributes.
         job = job_wrapper.get_job()
@@ -301,6 +303,7 @@ class BaseJobRunner( object ):
             galaxy_lib=job_wrapper.galaxy_lib_dir,
             env_setup_commands=env_setup_commands,
             working_directory=os.path.abspath( job_wrapper.working_directory ),
+            use_remote_datasets=self.app.config.use_remote_datasets,
             command=command_line,
         )
         ## Additional logging to enable if debugging from_work_dir handling, metadata
