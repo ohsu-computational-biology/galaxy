@@ -9,8 +9,6 @@ from matplotlib.backends.backend_pdf import PdfPages
 matplotlib.style.use('ggplot')
 
 def mutsig_viz(sig_genes, output, n_genes, q_val):
-	with PdfPages(output) as pdf:
-
 		# prepare data
 		d = pd.read_csv(sig_genes, sep = '\t')
 		d['total'] = d['n_nonsilent'] + d['n_silent'] + d['n_noncoding']
@@ -32,7 +30,7 @@ def mutsig_viz(sig_genes, output, n_genes, q_val):
 		ax = nsm.plot(x='gene', y = ['n_nonsilent', 'n_silent', 'n_noncoding'], kind='barh', stacked=True)
 		ax.set_xlabel('Mutation Count', fontsize=8)
 		ax.set_ylabel('Gene', fontsize=8)
-		ax.set_title('Top '+ str(n_genes) +' Significant Genes ('+_q+')', fontsize=4)
+		ax.set_title('Top '+ str(n_genes) +' Significant Genes ('+_q+')', fontsize=6)
 
 		l = plt.legend(loc="best")
 		l.get_texts()[0].set_text('Nonsilent')
@@ -47,7 +45,7 @@ def mutsig_viz(sig_genes, output, n_genes, q_val):
 		else:
 			ax.tick_params(axis='y', labelsize=7)
 
-		pdf.savefig()
+		plt.savefig(output, format="png")
 		plt.close()
 
 if __name__ == "__main__":

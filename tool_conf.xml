@@ -295,6 +295,8 @@
 	    <tool file="cufflinks/cuffdiff_wrapper.xml" />
      <label id="concatenate_files" text="Concatenate 1.0.0" />
              <tool file="concatenate/concatenate_wrapper.xml" />
+     <label id="multisample_rnaseq" text="Multisample Analytics" />
+             <tool file="multi_rnaseq/multi_rnaseq.xml" />
   </section>  
   <section id="cbioportal_tools" name="cBioPortal Tools">
     <tool file="cbioportal/cbioportal_create_files.xml" />

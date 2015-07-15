@@ -6,13 +6,18 @@ def write_html(output):
 			<!DOCTYPE html>
 			<html>
 			<head>
-			<style type="text/css">
-			</style>
-			<h2 id="title"><center>Harmony Point<br/><small><i>Secure Compute Results</i></small></center></h2>
-			<h4><center>Breast Cancer Data</center></h4>
-			<h5><center>Portland: 965<br/>Austin: 220</center></h5>
+			    <style type="text/css">
+					body{
+						font:14px/1.5 Arial, Helvetica, sans-serif;
+					}
+			    </style>
 			</head>
-			<body><center><img src="image.png"/></center></body></html>
+			<body>
+				<h1><center>Harmony Point</br><small><i>Secure Compute Results</i></small></center></h1>
+			  	<h4><center>1185 Breast Cancer Samples</center></h4>
+			<center><img src="image.png"/></center>
+			</body>
+			</html>
 	"""
 
 	f.write(print_str)
