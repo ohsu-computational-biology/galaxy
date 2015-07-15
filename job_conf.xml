@@ -100,9 +100,9 @@
 	<tool id="clinical_pathology_images" destination="condor_1C_100M_central_gateway"/>
 	<tool id="icgc_genomes" destination="condor_1C_100M_central_gateway"/>
 	<tool id="ga4gh" destination="condor_1C_100M_central"/>
-        <tool id="mutsig_viz" destination="condor_1C_100M"/>
-        <tool id="hpt_viz" destination="condor_1C_100M"/>
-        <tool id="multi_rnaseq" destination="condor_1C_100M"/>
+        <tool id="mutsig_viz" destination="condor_1C_100M_central"/>
+        <tool id="hpt_viz" destination="condor_1C_100M_central"/>
+        <tool id="multi_rnaseq" destination="condor_1C_100M_central"/>
     </tools>
     <limits>
 	<!-- Certain limits can be defined. -->
