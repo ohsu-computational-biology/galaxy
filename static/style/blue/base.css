@@ -780,9 +780,12 @@ a:active{color:#0071c5}
 #navbar-container{position:relative;right:-50%;float:left}
 .dropdown-toggle{font-size:14px}
 @media (max-width:767px){.navbar-nav .open .dropdown-menu>li>a{line-height:17px}}@media (min-width:0){.navbar-nav>li>a{padding-top:8.5px;padding-bottom:8.5px}}
+.unified-panel-body{background:#e5e5e5 !important}
+.dataset.state-ok{background:#c4d600 !important}
 .project-identity-mark{height:60px;margin-left:15px}
 .project{background:#2e77b7;color:#fff;float:left;font:bold 9px Arial,Helvetica,sans-serif;height:34px;line-height:10px;width:100%}
 #brand>h1{margin:0px}
+.toolMenuContainer{background:inherit !important}
 @font-face{font-family:'FontAwesome';src:url('../images/fonts/fontawesome-webfont.eot?v=4.2.0');src:url('../images/fonts/fontawesome-webfont.eot?#iefix&v=4.2.0') format('embedded-opentype'),url('../images/fonts/fontawesome-webfont.woff?v=4.2.0') format('woff'),url('../images/fonts/fontawesome-webfont.ttf?v=4.2.0') format('truetype'),url('../images/fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular') format('svg');font-weight:normal;font-style:normal}.fa{display:inline-block;font:normal normal normal 14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 .fa-lg{font-size:1.3333333333333333em;line-height:.75em;vertical-align:-15%}
 .fa-2x{font-size:2em}
