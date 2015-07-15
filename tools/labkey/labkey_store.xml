@@ -3,7 +3,7 @@
 
   <command>export http_proxy=;
 	   export https_proxy=;
-  	   curl --config $configfile --request POST $hostname/galaxyintegration/${containerPath}/importDataset.view? -s -S -u \${LABKEY_USERNAME}:\${LABKEY_PASSWORD} > $html_outfile
+  	   curl -k --config $configfile --request POST https://gateway.internal.ccc.org:9090/labkey/galaxyintegration/${containerPath}/importDataset.view? -s -S -u \${LABKEY_USERNAME}:\${LABKEY_PASSWORD} > $html_outfile
   </command>
 
   <inputs>
@@ -31,7 +31,7 @@ data-urlencode = "datasetId=$__app__.security.encode_id($data.id)"
 data-urlencode "runName=${name}"
 data-urlencode "runDescription=${description}"
 data-urlencode "historyId=$__app__.security.encode_id($data.creating_job.history.id)"
-data-urlencode "hostName=${__app__.config.galaxy_infrastructure_url}"
+data-urlencode "hostName=http://192.168.1.1:9091/galaxy"
 data-urlencode "apiKey=#from galaxy.managers import api_keys#${api_keys.ApiKeyManager( $__app__ ).get_or_create_api_key( $__user__ )}"
       </configfile>
   </configfiles>
