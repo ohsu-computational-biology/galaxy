@@ -6,18 +6,19 @@
        <option value="ohsu">ohsu</option>
     </param>
     <param name="input3" type="select" label="Select Cancer Type">
+       <option value="breast">breast</option>
        <option value="liver">liver</option>
        <option value="blood">blood</option>
        <option value="skin">skin</option>
        <option value="kidney">kidney</option>
     </param>
-    <param name="input4" type="text" area="True" label="Gateway URL's">
+    <param name="input4" type="text" area="True" label="Gateway URL's" value="austin-gateway.ccc.org, pdx-gateway.ccc.org">
       <sanitizer>
         <valid initial="string.printable">
         </valid>
       </sanitizer>
     </param>
-    <param name="input2" type="text" area="True" label="Arguments for the Application">
+    <param name="input2" type="text" area="True" label="Arguments for the Application" value="--oncotator -r /cluster_share/fs-mount/OHSU/container_data_instr/hp_test_data/oncotator_files -i /cluster_share/fs-mount/OHSU/datasource -o /mnt/App/exampleOutput.tsv -mutsig -r /cluster_share/fs-mount/OHSU/container_data_instr/hp_test_data/mutsig_files -o">
       <sanitizer>
         <valid initial="string.printable">
         </valid>
