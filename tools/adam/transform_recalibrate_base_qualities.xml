@@ -1,0 +1,16 @@
+<tool id="transform_recalibrate_base_qualities" name="Recalibrate Quality Scores" version="1.0">
+  <description>Recalibrate Quality Scores</description>
+  <command interpreter="bash">
+    transform_recalibrate_base_qualities.sh  $input $output
+  </command>
+  <inputs>
+    <param format="adam" name="input" type="data" label="HDFS_INPUT_FILE" help="--transform_recalibrate_base_qualities HDFS_INPUT_FILE help--"/>
+    <param format="var.adam" name="known_snapshots" type="data" label="HDFS_INPUT_FILE" help="--transform_recalibrate_base_qualities HDFS_INPUT_FILE help--"/>
+  </inputs>
+  <outputs>
+    <data format="bqsr.adam" name="output" metadata_source="input"/>
+  </outputs>
+  <help>
+  -- transform_recalibrate_base_qualities long help WIP --
+  </help>
+</tool>

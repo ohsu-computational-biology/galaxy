@@ -303,6 +303,15 @@
   <section id="variant_db_tools" name="Variant DB tools">
     <tool file="variant_db/variant_db_client.xml"/>
   </section>
+  <section id="adam_tools" name="Adam tools">
+    <tool file="adam/transform_bam_to_adam.xml" />
+    <tool file="adam/flagstat.xml" />
+    <tool file="adam/transform_sort.xml" />
+    <tool file="adam/transform_mark_duplicates.xml" />
+    <tool file="adam/transform_recalibrate_base_qualities.xml" />
+    <tool file="adam/transform_realign_indels.xml" />
+    <tool file="adam/gatk.xml" />
+  </section>
   <section id="custom_tools" name="Custom tools">
   </section>
 </toolbox>

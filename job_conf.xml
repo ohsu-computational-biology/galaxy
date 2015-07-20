@@ -45,6 +45,11 @@
             <param id="docker_volumes">$defaults</param>
             <param id="nativeSpecification">getenv=True\nrequest_cpus=16\nrequest_memory=16 GB</param>
         </destination>
+        <destination id="condor_1C_4G_ADAM" runner="drmaa">
+         <param id="docker_enabled">true</param>
+         <param id="docker_volumes">$defaults</param>
+         <param id="nativeSpecification">getenv=True\nrequest_cpus=1\nrequest_memory=4GB\njob_type=adam\nmachine_name=SPARK\nrequirements=(TARGET.SPARK_COMPUTE_NODE =?= True)</param>
+        </destination>
     </destinations>
     <tools>
 	<!-- Tools can be configured to use specific destinations or handlers,
@@ -59,6 +64,14 @@
 	<tool id="sum_reduce" destination="condor_2C_2G"/>
 	<tool id="getAnnotation" destination="condor_2C_2G"/>
 	<tool id="upload1" destination="condor_1C_100M"/>
+        <tool id="transform_bam_to_adam" destination="condor_1C_4G_ADAM"/>
+        <tool id="flagstat" destination="condor_1C_4G_ADAM"/>
+        <tool id="transform_sort" destination="condor_1C_4G_ADAM"/>
+        <tool id="transform_mark_duplicates" destination="condor_1C_4G_ADAM"/>
+        <tool id="convert_vcf_to_adam" destination="condor_1C_4G_ADAM"/>
+        <tool id="transform_recalibrate_base_qualities" destination="condor_1C_4G_ADAM"/>
+        <tool id="transform_realign_indels" destination="condor_1C_4G_ADAM"/>
+        <tool id="gatk" destination="condor_1C_4G_ADAM"/>
     </tools>
     <limits>
 	<!-- Certain limits can be defined. -->

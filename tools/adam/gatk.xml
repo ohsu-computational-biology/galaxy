@@ -1,0 +1,15 @@
+<tool id="gatk" name="GATK Adam Flow" version="1.0">
+  <description>Run complete GATK Adam Flow</description>
+  <command interpreter="bash">
+    adam_transform_GATK.sh  $input $output
+  </command>
+  <inputs>
+    <param format="bam" name="input" type="data" label="HDFS_INPUT_FILE" help="--transform_bam_to_adam.sh HDFS_INPUT_FILE help--"/>
+  </inputs>
+  <outputs>
+    <data format="adam" name="output" metadata_source="input"/>
+  </outputs>
+  <help>
+  -- adam_transform_GATK.sh long help WIP --
+  </help>
+</tool>
