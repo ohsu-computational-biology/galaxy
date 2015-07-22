@@ -64,14 +64,14 @@
 	<tool id="sum_reduce" destination="condor_2C_2G"/>
 	<tool id="getAnnotation" destination="condor_2C_2G"/>
 	<tool id="upload1" destination="condor_1C_100M"/>
-        <tool id="transform_bam_to_adam" destination="condor_1C_4G_ADAM"/>
-        <tool id="flagstat" destination="condor_1C_4G_ADAM"/>
-        <tool id="transform_sort" destination="condor_1C_4G_ADAM"/>
-        <tool id="transform_mark_duplicates" destination="condor_1C_4G_ADAM"/>
-        <tool id="convert_vcf_to_adam" destination="condor_1C_4G_ADAM"/>
-        <tool id="transform_recalibrate_base_qualities" destination="condor_1C_4G_ADAM"/>
-        <tool id="transform_realign_indels" destination="condor_1C_4G_ADAM"/>
-        <tool id="gatk" destination="condor_1C_4G_ADAM"/>
+        <tool id="adam_transform_bam_to_adam" destination="condor_1C_4G_ADAM"/>
+        <tool id="adam_flagstat" destination="condor_1C_4G_ADAM"/>
+        <tool id="adam_transform_sort" destination="condor_1C_4G_ADAM"/>
+        <tool id="adam_transform_mark_duplicates" destination="condor_1C_4G_ADAM"/>
+        <tool id="adam_convert_vcf_to_adam" destination="condor_1C_4G_ADAM"/>
+        <tool id="adam_transform_recalibrate_base_qualities" destination="condor_1C_4G_ADAM"/>
+        <tool id="adam_transform_realign_indels" destination="condor_1C_4G_ADAM"/>
+        <tool id="adam_gatk" destination="condor_1C_4G_ADAM"/>
     </tools>
     <limits>
 	<!-- Certain limits can be defined. -->
