@@ -1,7 +1,7 @@
-<tool id="transform_mark_duplicates" name="Mark Duplicate Reads" version="1.0">
+<tool id="adam_transform_mark_duplicates" name="Mark Duplicate Reads" version="1.0">
   <description>Mark Duplicate Reads in the adam file</description>
   <command interpreter="bash">
-    transform_mark_duplicates.sh  $input $output
+    adam_transform_mark_duplicates.sh  $input $output
   </command>
   <inputs>
     <param format="adam" name="input" type="data" label="HDFS_INPUT_FILE" help="--transform_mark_duplicates HDFS_INPUT_FILE help--"/>

@@ -1,7 +1,7 @@
-<tool id="transform_bam_to_adam" name="Convert bam to adam" version="1.0">
+<tool id="adam_transform_bam_to_adam" name="Convert bam to adam" version="1.0">
   <description>Converts a bam formatted file to adam formatted file</description>
   <command interpreter="bash">
-    transform_bam_to_adam.sh  $input $output
+    adam_transform_bam_to_adam.sh  $input $output
   </command>
   <inputs>
     <param format="bam" name="input" type="data" label="HDFS_INPUT_FILE" help="--transform_bam_to_adam.sh HDFS_INPUT_FILE help--"/>

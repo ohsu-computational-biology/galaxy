@@ -1,7 +1,7 @@
-<tool id="flagstat" name="Run Flagstat" version="1.0">
+<tool id="adam_flagstat" name="Run Flagstat" version="1.0">
   <description>Run Flagstat</description>
   <command interpreter="bash">
-    flagstat.sh  $input 
+    adam_flagstat.sh  $input 
   </command>
   <inputs>
     <param format="adam" name="input" type="data" label="HDFS_INPUT_FILE" help="-- flagstat HDFS_INPUT_FILE help--"/>
