@@ -8,6 +8,12 @@
   </inputs>
   <outputs>
     <data format="adam" name="output" metadata_source="input"/>
+    <data format="vcf" name="output" metadata_source="input"/>
+    <data format="var.adam" name="output" metadata_source="input"/>
+    <data format="mkdup.adam" name="output" metadata_source="input"/>
+    <data format="sort.adam" name="output" metadata_source="input"/>
+    <data format="ri.adam" name="output" metadata_source="input"/>
+    <data format="bqsr.adam" name="output" metadata_source="input"/>
   </outputs>
   <help>
   -- adam_transform_GATK.sh long help WIP --

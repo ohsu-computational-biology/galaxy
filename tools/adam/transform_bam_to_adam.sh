@@ -1,10 +1,8 @@
 #!/bin/bash
 
 #SET Argument variables
-#HDFS_INPUT_PATH_FILE=/user/vijaym/adam/NA12878.bam
-#HDFS_OUTPUT_PATH_FILE=/user/vijaym/adam/NA12878_CCC_TEST.adam
-HDFS_INPUT_PATH_FILE=/user/vijaym/adam//NA12878.bam
-HDFS_OUTPUT_PATH_FILE=/user/vijaym/adam//NA12878.adam
+HDFS_INPUT_PATH_FILE=$1
+HDFS_OUTPUT_PATH_FILE=$2
 SEARCH='//'
 HDFS_INPUT_PATH_FILE=${HDFS_INPUT_PATH_FILE/'//'/'/'}
 HDFS_OUTPUT_PATH_FILE=${HDFS_OUTPUT_PATH_FILE/'//'/'/'}
@@ -47,7 +45,7 @@ fi
 #hadoop fs -rm -r $HDFS_OUTPUT_PATH_FILE
 iferr=$(hadoop fs -rm -r $HDFS_OUTPUT_PATH_FILE 2>&1)
 fnc_check_error $? "DELETED the Ouput File In case it exists" "$iferr" 1
-iferr=$(export SPARK_HOME=/opt/cloudera/parcels/CDH-5.4.4-1.cdh5.4.4.p0.4/lib/spark; /opt/adam/adam-distribution-0.16.0/bin/adam-submit --conf spark.shuffle.service.enable=true --master yarn-client transform $HDFS_INPUT_PATH_FILE $HDFS_OUTPUT_PATH_FILE 2>&1)
+iferr=$(adam-submit --conf spark.shuffle.service.enable=true --master yarn-client transform $HDFS_INPUT_PATH_FILE $HDFS_OUTPUT_PATH_FILE 2>&1)
 fnc_check_error $? "Transform Bam to Adam Function Succeeded on Hadoop/Spark/Adam" "$iferr" 0
 echo "END DATE & TIME:$(date +"%m-%d-%Y %T")" $NEW_LINE
 echo "===============END DEBUG==============="

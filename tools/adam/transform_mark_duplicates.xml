@@ -7,7 +7,7 @@
     <param format="adam" name="input" type="data" label="HDFS_INPUT_FILE" help="--transform_mark_duplicates HDFS_INPUT_FILE help--"/>
   </inputs>
   <outputs>
-    <data format="sort.adam" name="output" metadata_source="input"/>
+    <data format="mkdup.adam" name="output" metadata_source="input"/>
   </outputs>
   <help>
   -- transform_mark_duplicates long help WIP --

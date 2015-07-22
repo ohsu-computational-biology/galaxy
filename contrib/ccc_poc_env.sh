@@ -44,3 +44,5 @@ export TILEDB_IMPORT_EXE=$CCC_SYNC_DIR/tools/TileDB/example/bin/gt_example_loade
 export GCC49_PREFIX_PATH=/opt/sync/softwares/compilers/gcc-4.9.1/
 export SCATTER_GATHER_JAR_PATH=$GENOMICS_DIR/ohsu/dnapipeline/ScatterGather-1.0.0.jar
 export OMICS_QUERY_UI_TOOL=$CCC_SYNC_DIR/tools/omics-query-tool
+export SPARK_HOME=/opt/cloudera/parcels/CDH-5.4.4-1.cdh5.4.4.p0.4/lib/spark
+export ADAM_HOME=/opt/adam/adam-distribution-0.16.0/bin/ 
