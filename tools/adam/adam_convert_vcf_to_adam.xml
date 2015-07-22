@@ -1,0 +1,15 @@
+<tool id="adam_convert_vcf_to_adam" name="vcf2adam" version="1.0">
+  <description>Convert a VCF file to the corresponding ADAM format</description>
+  <command interpreter="bash">
+    adam_convert_vcf_to_adam.sh  $input $output
+  </command>
+  <inputs>
+    <param format="vcf" name="input" type="data" label="HDFS_INPUT_FILE" help="The VCF file to apply the transforms to"/>
+  </inputs>
+  <outputs>
+    <data format="var.adam" name="output" metadata_source="input"/>
+  </outputs>
+  <help>
+  Convert a VCF file to the corresponding ADAM format
+  </help>
+</tool>

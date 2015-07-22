@@ -1,0 +1,15 @@
+<tool id="adam_transform_sort" name="Sort the Reads" version="1.0">
+  <description>Sort Reads</description>
+  <command interpreter="bash">
+    adam_transform_sort.sh  $input $output
+  </command>
+  <inputs>
+    <param format="adam" name="input" type="data" label="HDFS_INPUT_FILE" help="--transform_sort HDFS_INPUT_FILE help--"/>
+  </inputs>
+  <outputs>
+    <data format="sort.adam" name="output" metadata_source="input"/>
+  </outputs>
+  <help>
+  -- transform_sort long help WIP --
+  </help>
+</tool>

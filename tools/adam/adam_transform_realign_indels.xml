@@ -1,0 +1,15 @@
+<tool id="adam_transform_realign_indels" name="Re align Indels" version="1.0">
+  <description>Realign Indels</description>
+  <command interpreter="bash">
+    adam_transform_realign_indels.sh  $input $output
+  </command>
+  <inputs>
+    <param format="adam" name="input" type="data" label="HDFS_INPUT_FILE" help="--transform_realign_indels HDFS_INPUT_FILE help--"/>
+  </inputs>
+  <outputs>
+    <data format="ri.adam" name="output" metadata_source="input"/>
+  </outputs>
+  <help>
+  -- transform_realign_indels long help WIP --
+  </help>
+</tool>
