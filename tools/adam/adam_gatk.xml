@@ -5,10 +5,10 @@
   </command>
   <inputs>
     <param format="bam" name="input" type="data" label="HDFS_INPUT_FILE" help="--transform_bam_to_adam.sh HDFS_INPUT_FILE help--"/>
+    <param format="vcf" name="input" type="data" label="HDFS_INPUT_FILE" help="--transform_bam_to_adam.sh HDFS_INPUT_FILE help--"/>
   </inputs>
   <outputs>
     <data format="adam" name="output" metadata_source="input"/>
-    <data format="vcf" name="output" metadata_source="input"/>
     <data format="var.adam" name="output" metadata_source="input"/>
     <data format="mkdup.adam" name="output" metadata_source="input"/>
     <data format="sort.adam" name="output" metadata_source="input"/>

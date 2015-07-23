@@ -5,11 +5,12 @@
 #HDFS_OUTPUT_PATH_FILE=/user/vijaym/adam/NA12878_CCC_TEST.adam
 HDFS_INPUT_PATH_FILE=$1
 HDFS_OUTPUT_PATH_FILE=$2
-HDFS_VAR_ADAM=$3
+HDFS_VCF_PATH_FILE=$3
 
 SEARCH='//'
 HDFS_INPUT_PATH_FILE=${HDFS_INPUT_PATH_FILE/'//'/'/'}
 HDFS_OUTPUT_PATH_FILE=${HDFS_OUTPUT_PATH_FILE/'//'/'/'}
+HDFS_VCF_PATH_FILE=${HDFS_VCF_PATH_FILE/'//'/'/'}
 
 #BEGIN Debugging the status of variables
 NEW_LINE=`printf "\n\r"`
@@ -49,7 +50,9 @@ fi
 #hadoop fs -rm -r $HDFS_OUTPUT_PATH_FILE
 iferr=$(hadoop fs -rm -r $HDFS_OUTPUT_PATH_FILE 2>&1)
 fnc_check_error $? "DELETED the Ouput File In case it exists" "$iferr" 1
-iferr=$(adam-submit --conf spark.shuffle.service.enable=true --master yarn-client transform $HDFS_INPUT_PATH_FILE $HDFS_OUTPUT_PATH_FILE -recalibrate_base_qualities -known_snps $HDFS_VAR_ADAM 2>&1)
+iferr=$(adam-submit --conf spark.shuffle.service.enable=true --master yarn-client vcf2adam $HDFS_VCF_PATH_FILE $HDFS_VAR_PATH_FILE -onlyvariants 2>&1)
+fnc_check_error $? "*** Coverting VCF to Adam / converting known snps file to adam variants file succeeded ***" "$iferr" 0
+iferr=$(adam-submit --conf spark.shuffle.service.enable=true --master yarn-client transform $HDFS_INPUT_PATH_FILE $HDFS_OUTPUT_PATH_FILE -recalibrate_base_qualities -known_snps $HDFS_VAR_PATH_FILE 2>&1)
 fnc_check_error $? "Recalibrating Base Qualities Function Succeeded on Hadoop/Spark/Adam" "$iferr" 0
 echo "END DATE & TIME:$(date +"%m-%d-%Y %T")" $NEW_LINE
 echo "===============END DEBUG==============="
