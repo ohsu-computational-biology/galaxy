@@ -1,19 +1,19 @@
 <tool id="adam_gatk" name="GATK Adam Flow" version="1.0">
   <description>Run complete GATK Adam Flow</description>
   <command interpreter="bash">
-    adam_transform_GATK.sh  $input $output
+    adam_transform_GATK.sh  $bam_input $vcf_input $adam_out $var_out $mkdup_out $sort_out $ri_out $bqsr_out
   </command>
   <inputs>
-    <param format="bam" name="input" type="data" label="HDFS_INPUT_FILE" help="--transform_bam_to_adam.sh HDFS_INPUT_FILE help--"/>
-    <param format="vcf" name="input" type="data" label="HDFS_INPUT_FILE" help="--transform_bam_to_adam.sh HDFS_INPUT_FILE help--"/>
+    <param format="bam" name="bam_input" type="data" label="HDFS_INPUT_FILE" help="--transform_bam_to_adam.sh HDFS_INPUT_FILE help--"/>
+    <param format="vcf" name="vcf_input" type="data" label="HDFS_INPUT_FILE" help="--transform_bam_to_adam.sh HDFS_INPUT_FILE help--"/>
   </inputs>
   <outputs>
-    <data format="adam" name="output" metadata_source="input"/>
-    <data format="var.adam" name="output" metadata_source="input"/>
-    <data format="mkdup.adam" name="output" metadata_source="input"/>
-    <data format="sort.adam" name="output" metadata_source="input"/>
-    <data format="ri.adam" name="output" metadata_source="input"/>
-    <data format="bqsr.adam" name="output" metadata_source="input"/>
+    <data format="adam" name="adam_out" metadata_source="input"/>
+    <data format="var.adam" name="var_out" metadata_source="input"/>
+    <data format="mkdup.adam" name="mkdup_out" metadata_source="input"/>
+    <data format="sort.adam" name="sort_out" metadata_source="input"/>
+    <data format="ri.adam" name="ri_out" metadata_source="input"/>
+    <data format="bqsr.adam" name="bqsr_out" metadata_source="input"/>
   </outputs>
   <help>
   -- adam_transform_GATK.sh long help WIP --
