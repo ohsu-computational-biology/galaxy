@@ -8,12 +8,12 @@
     <param format="vcf" name="vcf_input" type="data" label="HDFS_INPUT_FILE" help="--transform_bam_to_adam.sh HDFS_INPUT_FILE help--"/>
   </inputs>
   <outputs>
-    <data format="adam" name="adam_out" metadata_source="input"/>
-    <data format="var.adam" name="var_out" metadata_source="input"/>
-    <data format="mkdup.adam" name="mkdup_out" metadata_source="input"/>
-    <data format="sort.adam" name="sort_out" metadata_source="input"/>
-    <data format="ri.adam" name="ri_out" metadata_source="input"/>
-    <data format="bqsr.adam" name="bqsr_out" metadata_source="input"/>
+    <data format="adam" name="adam_out" metadata_source="bam_input"/>
+    <data format="var.adam" name="var_out" metadata_source="bam_input"/>
+    <data format="mkdup.adam" name="mkdup_out" metadata_source="bam_input"/>
+    <data format="sort.adam" name="sort_out" metadata_source="bam_input"/>
+    <data format="ri.adam" name="ri_out" metadata_source="bam_input"/>
+    <data format="bqsr.adam" name="bqsr_out" metadata_source="bam_input"/>
   </outputs>
   <help>
   -- adam_transform_GATK.sh long help WIP --
