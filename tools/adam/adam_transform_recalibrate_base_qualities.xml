@@ -8,6 +8,7 @@
     <param format="vcf" name="known_snapshots" type="data" label="HDFS_INPUT_FILE" help="--transform_recalibrate_base_qualities HDFS_INPUT_FILE help--"/>
   </inputs>
   <outputs>
+    <data format="var.adam" name="output" metadata_source="input"/>
     <data format="bqsr.adam" name="output" metadata_source="input"/>
   </outputs>
   <help>
