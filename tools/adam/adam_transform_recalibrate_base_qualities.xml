@@ -4,8 +4,8 @@
     adam_transform_recalibrate_base_qualities.sh  $input $known_snapshots $var_output $output
   </command>
   <inputs>
-    <param format="adam" name="input" type="data" label="HDFS_INPUT_FILE" help="--transform_recalibrate_base_qualities HDFS_INPUT_FILE help--"/>
-    <param format="vcf" name="known_snapshots" type="data" label="HDFS_INPUT_FILE" help="--transform_recalibrate_base_qualities HDFS_INPUT_FILE help--"/>
+    <param format="adam" name="input" type="data" label="HDFS Adam Input File" help="--transform_recalibrate_base_qualities HDFS_INPUT_FILE help--"/>
+    <param format="vcf" name="known_snapshots" type="data" label="HDFS VCF Input File" help="--transform_recalibrate_base_qualities HDFS_INPUT_FILE help--"/>
   </inputs>
   <outputs>
     <data format="var.adam" name="var_output" metadata_source="input"/>
