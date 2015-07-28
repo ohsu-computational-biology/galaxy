@@ -4,7 +4,7 @@
     adam_transform_mark_duplicates.sh  $input $output
   </command>
   <inputs>
-    <param format="adam" name="input" type="data" label="HDFS_INPUT_FILE" help="--transform_mark_duplicates HDFS_INPUT_FILE help--"/>
+    <param format="adam" name="input" type="data" label="HDFS ADAM input file" help="--transform_mark_duplicates HDFS_INPUT_FILE help--"/>
   </inputs>
   <outputs>
     <data format="mkdup.adam" name="output" metadata_source="input"/>

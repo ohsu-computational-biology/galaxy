@@ -4,7 +4,7 @@
     adam_transform_sort.sh  $input $output
   </command>
   <inputs>
-    <param format="adam" name="input" type="data" label="HDFS_INPUT_FILE" help="--transform_sort HDFS_INPUT_FILE help--"/>
+    <param format="adam" name="input" type="data" label="HDFS Adam Input file" help="--transform_sort HDFS_INPUT_FILE help--"/>
   </inputs>
   <outputs>
     <data format="sort.adam" name="output" metadata_source="input"/>

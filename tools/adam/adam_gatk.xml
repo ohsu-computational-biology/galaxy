@@ -4,8 +4,8 @@
     adam_transform_GATK.sh  $bam_input $vcf_input $adam_out $var_out $mkdup_out $sort_out $ri_out $bqsr_out
   </command>
   <inputs>
-    <param format="bam" name="bam_input" type="data" label="HDFS_INPUT_FILE" help="--transform_bam_to_adam.sh HDFS_INPUT_FILE help--"/>
-    <param format="vcf" name="vcf_input" type="data" label="HDFS_INPUT_FILE" help="--transform_bam_to_adam.sh HDFS_INPUT_FILE help--"/>
+    <param format="bam" name="bam_input" type="data" label="HDFS BAM Input File" help="--transform_bam_to_adam.sh HDFS_INPUT_FILE help--"/>
+    <param format="vcf" name="vcf_input" type="data" label="HDFS VCF Input File" help="--transform_bam_to_adam.sh HDFS_INPUT_FILE help--"/>
   </inputs>
   <outputs>
     <data format="adam" name="adam_out" metadata_source="bam_input"/>
