@@ -13,7 +13,7 @@ HDFS_BQSR_PATH_FILE=$8
 
 #Remove // if it exists in the path coming from DTS
 SEARCH='//'
-HDFS_BAM_PATH_FILE=${HDFS_INPUT_PATH_FILE/'//'/'/'}
+HDFS_BAM_PATH_FILE=${HDFS_BAM_PATH_FILE/'//'/'/'}
 HDFS_ADAM_PATH_FILE=${HDFS_ADAM_PATH_FILE/'//'/'/'}
 HDFS_VCF_PATH_FILE=${HDFS_VCF_PATH_FILE/'//'/'/'}
 HDFS_VAR_PATH_FILE=${HDFS_VAR_PATH_FILE/'//'/'/'}
@@ -69,8 +69,8 @@ fnc_check_error $? "DELETED the Ouput File In case it exists" "$iferr" 1
 iferr=$(adam-submit --conf spark.shuffle.service.enable=true --master yarn-client transform $HDFS_BAM_PATH_FILE $HDFS_ADAM_PATH_FILE 2>&1)
 fnc_check_error $? "Transform Bam to Adam Function Succeeded on Hadoop/Spark/Adam" "$iferr" 0
 
-#iferr=$(adam-submit --conf spark.shuffle.service.enable=true --master yarn-client flagstat $HDFS_ADAM_PATH_FILE 2>&1)
-#fnc_check_error $? "Flagstat Function Succeeded on Hadoop/Spark/Adam" "$iferr" 0
+iferr=$(adam-submit --conf spark.shuffle.service.enable=true --master yarn-client flagstat $HDFS_ADAM_PATH_FILE 2>&1)
+fnc_check_error $? "Flagstat Function Succeeded on Hadoop/Spark/Adam" "$iferr" 0
 
 iferr=$(adam-submit --conf spark.shuffle.service.enable=true --master yarn-client transform $HDFS_ADAM_PATH_FILE $HDFS_SORT_PATH_FILE  -sort_reads 2>&1)
 fnc_check_error $? "Transform Sorting Function Succeeded on Hadoop/Spark/Adam" "$iferr" 0
