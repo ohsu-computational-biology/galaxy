@@ -305,6 +305,7 @@
   </section>
   <section id="adam_tools" name="Adam tools">
     <tool file="adam/adam_transform_bam_to_adam.xml" />
+    <tool file="adam/adam_convert_vcf_to_adam.xml" />
     <tool file="adam/adam_flagstat.xml" />
     <tool file="adam/adam_transform_sort.xml" />
     <tool file="adam/adam_transform_mark_duplicates.xml" />
