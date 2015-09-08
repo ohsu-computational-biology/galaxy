@@ -85,14 +85,6 @@
     #end if
     ##end standard gatk options
   </template>
-  <xml name="scatter_list">
-    <param name="scatter_intervals" label="List of Genomic Intervals" type="data" format="gatk_interval"/> 
-    <!--   <collection type="list"> -->
-    <!-- 	<element name="interval1" value="scatter_1.intervals"/> -->
-    <!--   </collection> -->
-    <!-- </param> -->
-  </xml>
-    
   <xml name="gatk_param_type_conditional">
     <conditional name="gatk_param_type">
       <param name="gatk_param_type_selector" type="select" label="Basic or Advanced GATK options">
