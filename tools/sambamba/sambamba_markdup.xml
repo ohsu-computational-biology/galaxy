@@ -1,0 +1,94 @@
+<tool id="sambamba_markdups" name="Sambamba Markdup" version="0.5.8">
+  <description>Marks duplicate reads in BAM files</description>
+  <requirements>
+    <requirement type="package" version="0.5.8">sambamba</requirement>
+    <container type="docker">ccc.docker/sambamba:latest</container>
+  </requirements>
+  <command interpreter="python">
+    sambamba_wrapper.py
+      -p '
+        <!-- start pass through options -->
+      sambamba
+
+      markdup
+
+      ## Number of threads
+      #if $num_threads :
+         --nthreads=$num_threads
+      #else 
+         --nthreads="\${GALAXY_SLOTS:-16}"
+      #end if
+      
+      ## Remove Duplicates?
+      #if $remove_duplicates :
+         --remove-duplicates
+      #end if
+
+      ## Compression Level?
+      #if $compression_level :
+         --compression-level=$compression_level
+      #end if
+
+      ## Show Progress?
+      #if $show_progress :
+         --show-progress
+      #end if
+
+      ## Temp Dir?
+      #if $tmp_dir :
+         --tmp_dir=$tmp_dir
+      #end if
+
+      ## Hash Table Size?
+      #if $hash_table_size :
+         --hash-table-size=$hash_table_size
+      #end if
+
+      ## Overflow List Size?
+      #if $overflow_list_size :
+         --overflow-list-size=$overflow_list_size
+      #end if
+
+      ## IO Buffer Size?
+      #if $io_buffer_size :
+         --io-buffer-size=$io_buffer_size
+      #end if
+
+      #set input_bams = ' '.join( [ str( $inp ) for $inp in $input_bam_files ] )
+      $input_bams
+
+      $output_bam
+         '  <!--- end of pass through options -->
+  </command>
+  <inputs>
+        <param name="input_bam_files" type="data" format="bam" label="BAM file in which to mark duplicate reads" multiple="true"  />
+        <param name="remove_duplicates" type="boolean" label="Remove Duplicates"  optional="true" help="Remove duplicates instead of just marking them" />  
+        <param name="num_threads" type="integer" value="" label="Number of Threads"  optional="true" help="Number of threads to use"/>
+        <param name="compression_level" type="integer" value="" min="0" max="9" optional="true" label="Compression Level" 
+            help="Compression level of the resulting file (from 0 to 9)"/>
+        <param name="show_progress" type="boolean" label="Show Progress"  optional="true" help="Show progressbar in STDERR" />  
+        <param name="tmp_dir" type="text" label="Temp Directory"  optional="true" help="Directory for temporary files"/>
+        <param name="hash_table_size" type="integer" value="" label="Hash Table Size"  optional="true" 
+            help="Size of hash table for finding read pairs (default is 262144 reads);will be rounded down to the nearest power of two; should be > (average coverage) * (insert size) for good performance"/>
+        <param name="overflow_list_size" type="integer" value="" label="Overflow List Size"  optional="true" 
+            help="Size of the overflow list where reads, thrown from the hash table get a second chance to meet their pairs (default is 200000 reads) increasing the size reduces the number of temporary files created"/>
+        <param name="io_buffer_size" type="integer" value="" label="IO Buffer Size"  optional="true" 
+            help="Two buffers of BUFFER_SIZE *megabytes* each are used for reading and writing BAM during the second pass (default is 128)"/>
+
+
+</inputs>
+  <outputs>
+        <data format="bam" name="output_bam" label="${tool.name} on ${on_string}: output_bam" from_work_dir="sambamba_out/output_bam.bam" />
+  </outputs>
+  <help>
+
+**What it does**
+
+This tool uses the sambamba to mark duplicate reads in a BAM file.
+
+lomereiter.github.io/sambamba/index.html
+https://github.com/lomereiter/sambamba
+
+  </help>
+</tool>
+
