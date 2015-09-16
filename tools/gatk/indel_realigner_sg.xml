@@ -60,6 +60,7 @@
         --maxReadsForRealignment "${analysis_param_type.max_reads_for_realignment}"
         --maxReadsInMemory "${analysis_param_type.max_reads_in_memory}"
         ${analysis_param_type.no_original_alignment_tags}
+        ${analysis_param_type.filter_bases_not_stored}
         '
     #end if
   </command>
@@ -134,7 +135,8 @@
         <param name="max_reads_for_consensuses" type="integer" value="120" label="Max reads (chosen randomly) used for finding the potential alternate consensuses" help="-greedy,--maxReadsForConsensuses &amp;lt;maxReadsForConsensuses&amp;gt;" />
         <param name="max_reads_for_realignment" type="integer" value="20000" label="Max reads allowed at an interval for realignment" help="-maxReads,--maxReadsForRealignment &amp;lt;maxReadsForRealignment&amp;gt;" />
         <param name="max_reads_in_memory" type="integer" value="15000" label="Max reads allowed to be kept in memory at a time by the SAMFileWriter" help="-maxInMemory,--maxReadsInMemory &amp;lt;maxReadsInMemory&amp;gt;" />
-        <param name="no_original_alignment_tags" type="boolean" checked="False" truevalue="--noOriginalAlignmentTags" falsevalue="" label="Don't output the original cigar or alignment start tags for each realigned read in the output bam" help="-noTags,--noOriginalAlignmentTags"/> 
+        <param name="no_original_alignment_tags" type="boolean" checked="False" truevalue="--noOriginalAlignmentTags" falsevalue="" label="Don't output the original cigar or alignment start tags for each realigned read in the output bam" help="-noTags,--noOriginalAlignmentTags"/>
+        <param name="filter_bases_not_stored" type="boolean" checked="False" truevalue="--filter_bases_not_stored" falsevalue="" label="MalformedReadFilter specific argument" help="-filterNoBases, --filter_bases_not_stored, Filter out reads with no stored bases (i.e. '*' where the sequence should be), instead of failing with an error"/>  
     </expand>
   </inputs>
   <outputs>
@@ -211,6 +213,7 @@ Go `here &lt;http://www.broadinstitute.org/gatk/guide/topic?name=intro&gt;`_ for
  maxReadsForConsensuses       max reads used for finding the alternate consensuses (necessary to improve performance in deep coverage)
  maxReadsForRealignment       max reads allowed at an interval for realignment; if this value is exceeded, realignment is not attempted and the reads are passed to the output file(s) as-is
  noOriginalAlignmentTags      Don't output the original cigar or alignment start tags for each realigned read in the output bam.
+ filter_bases_not_stored      Filter out reads with no stored bases (i.e. '*' where the sequence should be), instead of failing with an error 
 
 @CITATION_SECTION@
   </help>
