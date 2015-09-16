@@ -1,0 +1,195 @@
+<tool id="bamutil_dedup" name="BamUtil Dedup" version="1.0.13">
+  <description>Marks duplicate reads in BAM files</description>
+  <requirements>
+    <requirement type="package" version="1.0.13">bamutil</requirement>
+    <container type="docker">ccc.docker/bamutil:latest</container>
+  </requirements>
+  <command interpreter="python">
+    bamutil_wrapper.py
+      -p '
+        <!-- start pass through options -->
+      bamUtil
+
+      dedup
+
+     ## Input BAM File?
+      #if $input_bam_file :
+         --in $input_bam_file
+      #end if
+
+     ## Output BAM File?
+      #if $output_bam :
+         --out $output_bam
+      #end if
+
+     ## Min Qual?
+      #if $min_qual :
+         --minQual $min_qual
+      #end if
+      
+      ## Log File?
+      #if $log_file :
+         --log $log_file
+      #end if
+
+      ## One Chromosome?
+      #if $one_chrom :
+         --oneChrom
+      #end if
+
+      ## Remove Duplicates?
+      #if $rm_dups :
+         --rmDups
+      #end if
+
+      ## Force?
+      #if $force :
+         --force
+      #end if
+
+     ## Exclude Flags?
+      #if $exclude_flags :
+         --excludeFlags $exclude_flags
+      #end if
+      
+      ## Verbose?
+      #if $verbose :
+         --verbose
+      #end if
+
+      ## No EOF?
+      #if $no_eof :
+         --noeof
+      #end if
+
+      ## Params?
+      #if $params :
+         --params
+      #end if
+
+      ## Recalibrate?
+      #if $recalibrate :
+         --recab
+      #end if
+
+      ## Reference File?
+      #if $reference_file :
+         --refFile $reference_file
+      #end if
+
+      ## DBSNP File?
+      #if $dbsnp_file :
+         --dbsnp $dbsnp_file
+      #end if
+
+      ## Min Base Qual?
+      #if $min_base_qual :
+         --minBaseQual $min_base_qual
+      #end if
+      
+      ## Max Base Qual?
+      #if $max_base_qual :
+         --maxBaseQual $max_base_qual
+      #end if
+
+      ## Blended?
+      #if $blended :
+         --blended $blended
+      #end if
+
+      ## Fit Model?
+      #if $fit_model :
+         --fitModel
+      #end if
+
+      ## Fast?
+      #if $fast :
+         --fast
+      #end if
+
+      ## Keep Prev DBSNP?
+      #if $keep_prev_dbsnp :
+         --keepPrevDbsnp
+      #end if
+
+      ## Keep Prev Non Adjacent?
+      #if $keep_prev_nonadj :
+         --keepPrevNonAdjacent
+      #end if
+
+      ## Use Log Reg?
+      #if $use_log_reg :
+         --useLogReg
+      #end if
+
+      ## Qual Field?
+      #if $qual_field :
+         --qualField $qual_field
+      #end if
+
+      ## Store Qual Tag?
+      #if $store_qual_tag :
+         --storeQualTag $store_qual_tag
+      #end if
+
+      ## Build Exclude Flags?
+      #if $build_exclude_flags :
+         --buildExcludeFlags $build_exclude_flags
+      #end if
+
+      ## Apply Exclude Flags?
+      #if $apply_exclude_flags :
+         --applyExcludeFlags $apply_exclude_flags
+      #end if
+
+
+         '  <!--- end of pass through options -->
+  </command>
+  <inputs>
+        <param name="input_bam_file" type="data" format="bam" label="Input BAM file name (must be sorted)"  />
+        <param name="min_qual" type="integer" value="15" optional="true" label="Min Qual" help="Only add scores over this phred quality when determining a read's quality (default: 15)"/>
+        <param name="log_file" type="text" label="Log File"  optional="true" help="Log and summary statistics (default: [outfile].log, or stderr if --out starts with '-')"/>
+        <param name="one_chrom" type="boolean" label="One Chromosome"  optional="true" help="Treat reads with mates on different chromosomes as single-ended" />  
+        <param name="rm_dups" type="boolean" label="Remove Duplicates"  optional="true" help="Remove duplicates (default is to mark duplicates)" />  
+        <param name="force" type="boolean" label="Force Redup"  optional="true" help="Allow an already mark-duplicated BAM file, unmarking any previously marked duplicates and apply this duplicate marking logic.  Default is to throw errors         and exit when trying to run on an already mark-duplicated BAM" />  
+        <param name="exclude_flags" type="text" value="0x304" optional="true" label="Exclude Flags" help="Exclude reads with any of these flags set when determining or marking duplicates by default (0x304): exclude unmapped, secondary reads, and QC failures"/>
+        <param name="verbose" type="boolean" label="Verbose Mode"  optional="true" help="Turn on verbose mode" />  
+        <param name="no_eof" type="boolean" label="No EOF"  optional="true" help="Do not expect an EOF block on a bam file"/>  
+        <param name="params" type="boolean" label="Print Param Settings"  optional="true" help="Print the parameter settings"/>  
+        <param name="recalibrate" type="boolean" label="Recalibrate"  optional="true" help="Recalibrate in addition to deduping"/>  
+        <param name="reference_file" type="data" format="fasta" label="Reference File Name"  optional="true" help="Reference file required to recalibrate in addition to deduping" />
+        <param name="dbsnp_file" type="data" format="vcf" label="DBSNP File Name"  optional="true" help="Optional DBSNP file for recalibrate in addition to deduping" />
+        <param name="min_base_qual" type="integer" value="5" optional="true" label="Min Base Qual" help="Minimum base quality of bases to recalibrate (default: 5)"/>
+        <param name="max_base_qual" type="integer" value="50" optional="true" label="Max Base Qual" help="Maximum recalibrated base quality (default: 50)"/>
+        <param name="blended" type="integer" value="" optional="true" label="Blended Model Weight" help="Blended model weight"/>
+        <param name="fit_model" type="boolean" label="Fit Model"  optional="true" help="Check if the logistic regression model fits the data"/>  
+        <param name="fast" type="boolean" label="Fast"  optional="true" help="use a compact representation that only allows:
+	                                   * at most 256 Read Groups
+	                                   * maximum quality 63
+	                                   * at most 127 cycles
+	                                overrides fitModel, but is overridden by useLogReg
+	                                uses up to about 2.25G more memory than running without --fast"/>  
+        <param name="keep_prev_dbsnp" type="boolean" label="Keep Prev DBSNP"  optional="true" help="Do not exclude entries where the previous base is in dbsnp when building the recalibration table. By default they are excluded from the table"/>  
+        <param name="keep_prev_nonadj" type="boolean" label="Keep Prev Non Adjacent"  optional="true" help="do not exclude entries where the previous base is not adjacent(not a Cigar M/X/=) when building the recalibration table. By default they are excluded from the table (except the first cycle)"/>  
+        <param name="use_log_reg" type="boolean" label="Use Logistic Regression"  optional="true" help="use logistic regression calculated quality for the new quality automatically applies fitModel and overrides fast"/>  
+        <param name="qual_field" type="text" value="" optional="true" label="Max Base Qual" help="Tag to get the starting base quality (default is to get it from the Quality field)"/>
+        <param name="store_qual_tag" type="text" value="" optional="true" label="Tag To Get Start Quality" help="Tag to get the starting base quality (default is to get it from the Quality field)"/>
+        <param name="build_exclude_flags" type="text" value="" optional="true" label="Flags To Exclude Reads" help="Exclude reads with any of these flags set when building the recalibration table"/>
+        <param name="apply_exclude_flags" type="text" value="" optional="true" label="Apply Exclude Flags" help="Do not apply the recalibration table to any reads with any of these flags set"/>
+
+</inputs>
+  <outputs>
+        <data format="bam" name="output_bam" label="${tool.name} on ${on_string}: output_bam" from_work_dir="sambamba_out/output_bam.bam" />
+  </outputs>
+  <help>
+
+**What it does**
+
+This tool uses the BamUtil to mark duplicate reads in a BAM file.
+
+genome.sph.umich.edu/wiki/BamUtil
+https://github.com/statgen/bamUtil
+
+  </help>
+</tool>
+

@@ -276,6 +276,11 @@
             <tool file="vcf_sorter/vcfsorter.xml" />
     <label id="TileDB" text="TileDB tools"/>
             <tool file="tiledb/tiledb_import.xml"/>
+    <label id="Sambamba" text="Sambamba version 0.5.8" />
+	    <tool file="sambamba/sambamba_markdup.xml" />
+	    <tool file="sambamba/sambamba_sort.xml" />
+    <label id="BamUtil" text="BamUtil version 1.0.13" />
+	    <tool file="bamutil/bamutil_dedup.xml" />
   </section>  
   <section id="RNA_sequencing" name="RNA sequencing tools">
      <label id="tophat2" text="Tophat2 version 2.0.14" />
