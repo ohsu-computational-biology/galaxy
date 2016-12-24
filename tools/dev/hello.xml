@@ -1,0 +1,21 @@
+<tool id="hello_1" name="Hello, world!" version="0.1.0">
+  <description>for testing</description>
+  <command>echo $message</command>
+  <inputs>
+    <param name="message" size="20" type="text" value="Hello, world!" label="Message" />
+  </inputs>
+  <requirements>
+    <container type="docker">ubuntu</container>
+  </requirements>
+  <stdio>
+    <exit_code range="1:" err_level="fatal" />
+  </stdio>
+  <outputs>
+    <data format="text" name="output" />
+  </outputs>
+
+  <help>
+Hello, world dev tool.
+  </help>
+
+</tool>
