@@ -1,0 +1,22 @@
+<tool id="sleep_1" name="Sleep" version="0.1.0">
+  <description>for some duration</description>
+  <command>sleep $duration</command>
+  <inputs>
+    <param name="duration" size="5" type="text" value="10" label="Duration" />
+  </inputs>
+  <requirements>
+    <container type="docker">ubuntu</container>
+  </requirements>
+  <stdio>
+    <exit_code range="1:" err_level="fatal" />
+  </stdio>
+  <!-- TODO it's weird that <outputs> is required in order to get an entry in the History UI -->
+  <outputs>
+    <data format="text" name="output" />
+  </outputs>
+
+  <help>
+Sleep dev tool help goes here.
+  </help>
+
+</tool>
